@@ -74,27 +74,28 @@ header {
   align-items: center;
   justify-content: space-between;
   padding : 2em;
-  padding-left: 6em;
-  padding-right: 6em;
+  padding-left: 1em;
+  padding-right: 1em;
 }
 button {
   border:0;
+  padding:0; margin:0;
   background:transparent;
   font-size: 2em;
   font-weight: 600;
 }
 .headerBtn {
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: 400;
 }
 .loginBtn {
-  font-size: 1em;
+  font-size: 0.8em;
   background-color: var(--charcoal);
   border-radius: 0.3em;
   color: var(--white);
-  padding:0.5em;
-  padding-left:1.2em;
-  padding-right:1.2em;
+  padding:0.4em;
+  padding-left:1em;
+  padding-right:1em;
 }
 section {
   width:100vw;
@@ -113,4 +114,32 @@ section {
 }
 .heading {
   font-size: 3em;
+}
+.subHeading {
+  font-weight: 400;
+}
+#headerTitle {
+  font-size: 1.5em;
+  
+}
+@media only screen and (min-width: 1024px) {
+  header {
+    
+    padding : 2em;
+    padding-left: 4em;
+    padding-right: 4em;
+  }
+  .headerBtn {
+    font-size: 1.5em;
+  }
+  .loginBtn {
+    font-size: 1em;
+    padding:0.5em;
+    padding-left:1.2em;
+    padding-right:1.2em;
+  }
+  #headerTitle {
+    font-size: 2em;
+    
+  }
 }
