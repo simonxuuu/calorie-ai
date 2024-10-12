@@ -49,14 +49,19 @@ export default function Track() {
     return (
         <main>
       <section style={{ marginTop: "10em" }}>
-        <div className="trackingSide">
-            <form onSubmit={handleSubmit}>
-                <input type="file" onChange={handleFileChange} />
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-        <div className="nutritionalSide">
-            
+        <div className="trackingPage">
+            <div className="trackingSide">
+                <form onSubmit={handleSubmit}>
+                    <input type="file" onChange={handleFileChange} />
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <div className="nutritionalSide">
+                <span className="nutritionalValues">Calories: {nutritionalValues.calories}</span>
+                <div className="emptyProgressBar">
+                    <div className="filledProgressBar" style={{ width: `${nutritionalValues.calories / 2000 * 100}%` }}></div>
+                </div>
+            </div>
         </div>
         
       </section>
