@@ -17,6 +17,7 @@ export async function POST(req) {
         const imageFile = formData.get('image');
 
         if (!imageFile) {
+            console.error('no image file provided');
             return new Response(JSON.stringify({ message: 'No image file provided' }), { status: 400 });
         }
 
@@ -46,6 +47,7 @@ export async function POST(req) {
         return new Response(JSON.stringify({ message: 'Image processed successfully', generatedText }), { status: 200 });
     } catch (error) {
         // Handle any errors
+        console.error(error);
         return new Response(JSON.stringify({ message: 'Internal Server Error', error: error.message }), { status: 500 });
     }
 }
