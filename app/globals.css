@@ -66,7 +66,9 @@ html{
 header {
   margin:0;
   border:0;
+  position:fixed;
   box-sizing: border-box;
+  background:var(--white);
   width:100vw;
   display:flex;
   align-items: center;
@@ -78,8 +80,8 @@ header {
 button {
   border:0;
   background:transparent;
-font-size: 2em;
-font-weight: 600;
+  font-size: 2em;
+  font-weight: 600;
 }
 .headerBtn {
   font-size: 1.5em;
@@ -88,9 +90,19 @@ font-weight: 600;
 .loginBtn {
   font-size: 1em;
   background-color: var(--charcoal);
-  border-radius: 0.5em;
+  border-radius: 0.3em;
   color: var(--white);
   padding:0.5em;
-  padding-left:1em;
-  padding-right:1em;
+  padding-left:1.2em;
+  padding-right:1.2em;
+}
+section {
+  width:100vw;
+  height:500px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding:0;
+  padding-left:5em;
+  padding-right:5em;
 }
