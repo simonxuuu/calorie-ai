@@ -1,1 +1,96 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+
+
+body,
+html {
+  
+  overflow-y: hidden;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  border: 0;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  --topBarColor: rgba(26, 26, 26, 0.377);
+  --topBarBorderColor: rgba(255, 255, 255, 0.048);
+  --darker: rgb(10, 10, 10);
+  --dark: rgb(20, 20, 20);
+  --lessdark: rgb(36, 36, 36);
+  --light: rgb(235, 235, 235);
+  --subTextColor: rgb(54, 54, 54);
+  --accent1: rgb(24, 204, 120);
+  --accent1Darker:rgb(32, 177, 87);
+  --accent1Btn: rgba(9, 119, 86, 0.521);
+  --accent2: rgb(255, 255, 255);
+  --lessonLocked: rgb(41, 41, 41);
+  --lessonComplete: rgb(13, 156, 77);
+  --lessonInComplete: rgb(12, 175, 85);
+  --transitionAnim : "none";
+  --correctAnswer: rgb(27, 143, 75);
+  --wrongAnswer: rgb(202, 52, 41);
+
+  --red: rgb(224, 56, 44);
+  --blue:rgb(20, 165, 248);
+  --teal: rgb(32, 189, 163);
+  --darkTeal: rgb(27, 143, 75);
+  --tealGreen : rgb(17, 199, 108);
+  --darkTealGreen: rgb(27, 143, 75);
+  --green: rgb(12, 175, 85);
+  --darkGreen : rgb(12, 143, 71);
+
+
+  --white : rgb(230, 230, 230);
+  --grey: rgb(185, 185, 180);
+  --darkGrey: rgb(133, 133, 133);
+  --charcoal: rgb(21, 21, 21);
+  --lightCharcoal:rgb(25, 25, 25);
+  --lightestCharcoal: rgb(32, 32, 32);
+  --darkCharcoal:rgb(17, 17, 17);
+
+  background-color: var(--white);
+  color :var(--charcoal);
+  text-wrap: wrap;
+
+  scrollbar-color: rgb(255, 255, 255, 0.2) transparent;
+  scrollbar-width: 7px; margin:0; border:0; padding:0;
+}
+html{
+  margin:0; border:0; padding:0;
+  scroll-behavior: smooth;
+ 
+  overflow-y: scroll;
+}
+header {
+  margin:0;
+  border:0;
+  box-sizing: border-box;
+  width:100vw;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  padding : 2em;
+  padding-left: 6em;
+  padding-right: 6em;
+}
+button {
+  border:0;
+  background:transparent;
+font-size: 2em;
+font-weight: 600;
+}
+.headerBtn {
+  font-size: 1.5em;
+  font-weight: 400;
+}
+.loginBtn {
+  font-size: 1em;
+  background-color: var(--charcoal);
+  border-radius: 0.5em;
+  color: var(--white);
+  padding:0.5em;
+  padding-left:1em;
+  padding-right:1em;
+}
