@@ -1,4 +1,5 @@
-import { GoogleAIFileManager, GoogleGenerativeAI } from "@google/generative-ai/server";
+import { GoogleAIFileManager } from "@google/generative-ai/server";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const fileManager = new GoogleAIFileManager(process.env.API_KEY);
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);
