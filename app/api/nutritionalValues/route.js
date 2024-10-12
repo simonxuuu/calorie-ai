@@ -12,42 +12,24 @@ export async function GET(req) {
 }
 
 export async function POST(req) {
-    const formData = await req.formData();
-    try {
-        const imageFile = formData.get('image');
+    const {imagePrev} = req.body;
+    return new Response(JSON.stringify({ imagePrev }), { status: 200 });
+    const base64Data = imagePrev.split(',')[1];
+    const response = await fetch(`https://api.gemini.com/${process.env.API_KEY}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer YOUR_ACCESS_TOKEN' // If needed
+        },
+        body: JSON.stringify({
+            image: base64Data // Adjust as per API requirements
+        })
+    });
 
-        if (!imageFile) {
-            console.error('no image file provided');
-            return new Response(JSON.stringify({ message: 'No image file provided' }), { status: 400 });
-        }
-
-      
-        const uploadResult = await fileManager.uploadFile(imageFile.stream(), {
-            mimeType: imageFile.type,
-            displayName: imageFile.name,
-        });
-
-        console.log(`Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`);
-
-        
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        const result = await model.generateContent([
-            "Tell me about this image.",
-            {
-                fileData: {
-                    fileUri: uploadResult.file.uri,
-                    mimeType: uploadResult.file.mimeType,
-                },
-            },
-        ]);
-
-        const generatedText = result.response.text();
-        console.log(generatedText);
-
-        return new Response(JSON.stringify({ message: 'Image processed successfully', generatedText }), { status: 200 });
-    } catch (error) {
-        // Handle any errors
-        console.error(error);
-        return new Response(JSON.stringify({ message: 'Internal Server Error', error: error.message }), { status: 500 });
+    if (response.ok) {
+        const result = await response.json();
+        return result;
+    } else {
+        console.error('Error:', response.statusText);
     }
 }
