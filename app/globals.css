@@ -78,7 +78,7 @@ header {
   padding-right: 1em;
 }
 button {
-  border:0;
+  border:0; cursor: pointer;
   padding:0; margin:0;
   background:transparent;
   font-size: 2em;
@@ -97,15 +97,25 @@ button {
   padding-left:1em;
   padding-right:1em;
 }
+.generalButton{
+  font-size: 0.8em;
+  background-color: var(--charcoal);
+  border-radius: 0.3em;
+  color: var(--white);
+  padding:0.4em;
+  padding-left:1em;
+  padding-right:1em;
+}
 section {
   width:100vw;
-  height:500px;
+  height:fit-content;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding:0;
-  padding-left:3em;
-  padding-right:3em;
+  padding-left:1em;
+  padding-right:1em;
 }
 .showcaseImage{
   width:fit-content;
@@ -114,9 +124,11 @@ section {
 }
 .heading {
   font-size: 3em;
+  max-width: 95%;
 }
 .subHeading {
   font-weight: 400;
+  max-width: 90%;
 }
 #headerTitle {
   font-size: 1.5em;
@@ -132,6 +144,16 @@ section {
   .headerBtn {
     font-size: 1.5em;
   }
+  .subHeading {
+    
+    max-width: 100%;
+  }
+  .generalButton {
+    font-size: 1em;
+    padding:0.5em;
+    padding-left:1.2em;
+    padding-right:1.2em;
+  }
   .loginBtn {
     font-size: 1em;
     padding:0.5em;
@@ -141,5 +163,14 @@ section {
   #headerTitle {
     font-size: 2em;
     
+  }
+  section {
+    
+    align-items: center;
+    justify-content: space-between;
+    padding:0;
+    padding-left:3em;
+    padding-right:3em;
+    flex-direction: row;
   }
 }
