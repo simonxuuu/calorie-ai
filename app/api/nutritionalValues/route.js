@@ -1,8 +1,8 @@
 import { GoogleAIFileManager } from "@google/generative-ai/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const fileManager = new GoogleAIFileManager(process.env.GEMINI_API_KEY);
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const fileManager = new GoogleAIFileManager(process.env.API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 
 export async function GET(req) {
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
@@ -15,20 +15,18 @@ export async function POST(req) {
     const formData = await req.formData();
     try {
         const imageFile = formData.get('image');
-        console.log("Getting image...")
+
         if (!imageFile) {
-            console.log("Could not get image")
             console.error('no image file provided');
             return new Response(JSON.stringify({ message: 'No image file provided' }), { status: 400 });
         }
 
-        console.log("Uploading image...")
+      
         const uploadResult = await fileManager.uploadFile(imageFile.stream(), {
             mimeType: imageFile.type,
             displayName: imageFile.name,
         });
 
-    
         console.log(`Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`);
 
         

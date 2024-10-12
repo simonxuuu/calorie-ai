@@ -19,14 +19,14 @@ export default function Track() {
         const formData = new FormData();
         formData.append('image', file);
 
-        const res = await fetch('/api/nutritionalValues', {
+        const res = await fetch('/api/upload', {
             method: 'POST',
             body: formData,
         });
 
-        const result = await res.json();
-        setNutritionalValues(result);
-        console.log(result);
+        //const result = await res.json();
+        //setNutritionalValues(result);
+        console.log(res);
     };
 
     const renderNutritionalValues = () => {
