@@ -112,7 +112,46 @@ button {
 }
 
 .trackingPage {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh; /* Optional: to ensure the container takes the full viewport height */
+  padding: 0 20px; /* Optional: to add some padding */
+  width: 100%;
+}
+
+.trackingSide, .nutritionalSide {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   
+}
+
+.emptyProgressBar {
+  width: 100%;
+  height: 30px; 
+  background-color: #e0e0e0; 
+  border-radius: 5px; 
+  overflow: hidden; 
+  position: relative;
+}
+
+.filledProgressBar {
+  height: 100%;
+  background-color: #76c7c0; 
+  border-radius: 5px 0 0 5px; 
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.trackingSide {
+  justify-content: center;
+}
+
+.nutritionalSide {
+  justify-content: center;
 }
 
 .loginBtn {
