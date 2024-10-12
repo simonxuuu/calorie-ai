@@ -2,7 +2,6 @@
 import { useState, useEffect } from 'react';
 import Image from "next/image";
 
-
 export default function Track() {
     const [file, setFile] = useState(null);
     const [imagePrev,setImagePrev] = useState('/images/food1.jpg');
@@ -14,6 +13,11 @@ export default function Track() {
         protein: 0,
     });
     
+    
+
+
+
+
     const handleFileChange = (e) => {
         const file = e.target.files[0];
     if (!file) return; // Check if a file is selected
@@ -22,6 +26,7 @@ export default function Track() {
     
     reader.onloadend = () => {
         console.log(reader.result);
+        
         setImagePrev(reader.result);
     };
     
@@ -35,7 +40,7 @@ export default function Track() {
 
         fetch('/api/nutritionalValues', {
             method: 'POST',
-            body: imagePrev,
+            body: imagePrev.split(',')[1],
           })
           .then(response => {
             if (!response.ok) {

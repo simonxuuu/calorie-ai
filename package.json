@@ -13,6 +13,7 @@
     "bun": "^1.1.30",
     "formidable": "^3.5.1",
     "fs": "^0.0.1-security",
+    "googleapis": "^144.0.0",
     "next": "14.2.15",
     "path": "^0.12.7",
     "react": "^18",
