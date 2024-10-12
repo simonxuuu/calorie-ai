@@ -1,6 +1,11 @@
+'use client'
+import { useRouter } from "next/navigation";
 import "./globals.css";
 import Image from "next/image";
 export default function Home() {
+
+const router = useRouter();
+
   return (
     <main>
       <section id='landing0' style={{ marginTop: "10em" }}>
@@ -10,7 +15,7 @@ export default function Home() {
           <h2 className="subHeading">
             Your journey to a healthier lifestyle starts here.
           </h2>
-          <button className="generalButton">Get Started</button>
+          <button onClick={()=>{router.push('/track')}}className="generalButton">Get Started</button>
         </div>
         <Image
           className="showcaseImage"
@@ -69,7 +74,7 @@ export default function Home() {
       
         <div style={{margin:0,paddingLeft:0,display:'flex',flexDirection:'column',alignItems:'center'}}className="sectionContentLeft">
           <h1 style={{textAlign:'center'}}className="heading">One click is all it takes to better your health.</h1>
-          <button className="generalButton">Let's go</button>
+          <button onClick={()=>{router.push('/track')}} className="generalButton">Let's go</button>
          
         </div>
         

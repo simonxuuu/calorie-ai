@@ -24,7 +24,7 @@ export default function Header() {
         <button onClick={()=>{document.getElementById("landing1").scrollIntoView({block: "center"}); }}className='headerBtn'>Clarity</button>
         <button onClick={()=>{document.getElementById("landing3").scrollIntoView({block: "center"}); }}className='headerBtn' >Insights</button>
         </div>
-        <button className='loginBtn'>Get Started</button>
+        <button onClick={()=>{router.push('/track')}}className='loginBtn'>Get Started</button>
       </header>
     );
   }
