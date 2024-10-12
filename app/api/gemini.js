@@ -1,19 +1,26 @@
 import { GoogleAIFileManager } from "@google/generative-ai/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import fs from 'fs';
 import path from 'path';
 
-const GEMINI_API_KEY = "AIzaSyDiEwflOCcG6_T498iE_pmcEHieoScuoig"
+const GEMINI_API_KEY = "AIzaSyDiEwflOCcG6_T498iE_pmcEHieoScuoig";
 
 const fileManager = new GoogleAIFileManager(GEMINI_API_KEY);
 const mediaPath = path.join(process.cwd(), 'mediapath'); // Use absolute path
 
+// Read the image file and convert it to base64
+const imagePath = `${mediaPath}/food1.jpg`;
+const imageBase64 = fs.readFileSync(imagePath, { encoding: 'base64' });
+
 const uploadResult = await fileManager.uploadFile(
-  `${mediaPath}/food1.jpg`,
+  imageBase64,
   {
     mimeType: "image/jpeg",
     displayName: "food image",
+    isBase64: true, // Indicate that the file is base64 encoded
   },
 );
+
 // View the response.
 console.log(
   `Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.file.uri}`,
