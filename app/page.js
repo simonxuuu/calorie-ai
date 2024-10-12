@@ -42,7 +42,7 @@ const router = useRouter();
         </div>
         
       </section>
-      <section id='landing2'style={{ marginTop: "10em",justifyContent:'center' }}>
+      <section id='landing2'style={{ marginTop: "10em",justifyContent:'center' ,padding:0}}>
       
         <div style={{margin:0,marginLeft:0}}className="sectionContentLeft">
           <h1 style={{textAlign:'center'}}className="heading">Click. Wait. See. </h1>
@@ -70,7 +70,7 @@ const router = useRouter();
           src={"/images/food2.jpg"}
         />
       </section>
-      <section id='landing4'style={{ marginTop: "10em",justifyContent:'center' }}>
+      <section id='landing4'style={{ marginTop: "10em",justifyContent:'center',padding:0}}>
       
         <div style={{margin:0,paddingLeft:0,display:'flex',flexDirection:'column',alignItems:'center'}}className="sectionContentLeft">
           <h1 style={{textAlign:'center'}}className="heading">One click is all it takes to better your health.</h1>
