@@ -199,8 +199,15 @@ section {
 }
 #headerTitle {
   font-size: 1.5em;
-  
+  display: none;
 }
+@media only screen and (min-width: 500px) {
+  #headerTitle{
+    display: block;
+  }
+}
+
+
 @media only screen and (min-width: 1024px) {
   header {
     
