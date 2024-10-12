@@ -8,7 +8,7 @@ export default function Home() {
         <div className="sectionContentRight">
           <h1 className="heading">Track your calories, with one click.</h1>
           <h2 className="subHeading">
-            Subheading Subheading Subheading Subheading Subheading Subheading
+            Your journey to a healthier lifestyle starts here.
           </h2>
           <button className="generalButton">Get Started</button>
         </div>
@@ -31,7 +31,7 @@ export default function Home() {
         <div className="sectionContentLeft">
           <h1 className="heading">Track your calories, with one click.</h1>
           <h2 className="subHeading">
-            Subheading Subheading Subheading Subheading Subheading Subheading
+            Effortless tracking for a better you.
           </h2>
           <button className="generalButton">Get Started</button>
         </div>
