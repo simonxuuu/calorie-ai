@@ -9,7 +9,7 @@ export default function Header() {
       <header>
         <div style={{display: 'flex',
   alignItems: 'center',
-  gap:'0.3em'}}>
+  gap:'0.3em',justifyContent:'center'}}>
         <button id='headerTitle' onClick={()=>{router.push('/');}}>Calorie AI </button>
         <Image
           className="logo"
@@ -24,7 +24,7 @@ export default function Header() {
         <button onClick={()=>{document.getElementById("landing1").scrollIntoView({block: "center"}); }}className='headerBtn'>Test</button>
         <button className='headerBtn'>Test</button>
         </div>
-        <button className='loginBtn'>Login</button>
+        <button className='loginBtn'>Get Started</button>
       </header>
     );
   }

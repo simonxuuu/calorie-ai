@@ -199,7 +199,7 @@ section {
   padding-left: 1em;
 }
 .showcaseImage{
-  order:1;
+  
   width:fit-content;
   height:25em;
   border-radius: 2em;
@@ -221,12 +221,13 @@ section {
     display: block;
   }
 }
-
-
-@media only screen and (min-width: 1024px) {
+@media only screen and (max-width: 1024px) {
   .showcaseImage{
-    order:auto;
+    order:1;
   }
+}
+@media only screen and (min-width: 1024px) {
+  
   .sectionContentRight{
     margin:0;
     margin-right: 2em;
