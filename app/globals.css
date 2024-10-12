@@ -181,10 +181,21 @@ section {
   align-items: center;
   justify-content: space-between;
   padding:0;
-  padding-left:1em;
-  padding-right:1em;
+  
+}
+
+.sectionContentRight{
+  margin:0;
+  padding:0;
+  padding-left: 1em;
+}
+.sectionContentLeft{
+  margin:0;
+  padding:0;
+  padding-left: 1em;
 }
 .showcaseImage{
+  order:1;
   width:fit-content;
   height:25em;
   border-radius: 2em;
@@ -209,6 +220,18 @@ section {
 
 
 @media only screen and (min-width: 1024px) {
+  .showcaseImage{
+    order:auto;
+  }
+  .sectionContentRight{
+    margin:0;
+    margin-right: 2em;
+  }
+  .sectionContentLeft{
+    margin:0;
+    margin-left: 2em;
+    order:0;
+  }
   header {
     
     padding : 2em;
