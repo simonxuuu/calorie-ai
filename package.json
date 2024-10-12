@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
+    "bun": "^1.1.30",
     "formidable": "^3.5.1",
     "fs": "^0.0.1-security",
     "next": "14.2.15",
