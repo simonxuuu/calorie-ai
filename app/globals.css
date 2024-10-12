@@ -63,6 +63,9 @@ html{
  
   overflow-y: scroll;
 }
+main {
+  min-height: calc(100vh - 22em);
+}
 header {
   margin:0;
   border:0;
