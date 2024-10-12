@@ -1,8 +1,14 @@
 "use client"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Track() {
     const [file, setFile] = useState(null);
+    const [nutritionalValues, setNutritionalValues] = useState({
+        calories: 0,
+        carbs: 0,
+        fat: 0,
+        protein: 0,
+    });
 
     const handleFileChange = (e) => {
         setFile(e.target.files[0]);
@@ -19,16 +25,42 @@ export default function Track() {
         });
 
         const result = await res.json();
+        setNutritionalValues(result);
         console.log(result);
     };
 
+    const renderNutritionalValues = () => {
+        return (
+            <div>
+                <h2>Calories: {nutritionalValues.calories}</h2>
+                <h2>Carbs: {nutritionalValues.carbs}</h2>
+                <h2>Fat: {nutritionalValues.fat}</h2>
+                <h2>Protein: {nutritionalValues.protein}</h2>
+            </div>
+        );
+    }
+
+    useEffect(() => {
+        if (nutritionalValues.calories) {
+            renderNutritionalValues();
+        }
+    }, [nutritionalValues]);
+
     return (
-        <div className="trackingPage">
-            <h1>Track your calories with just a picture</h1>
-            <form onSubmit={handleSubmit} className="trackingSubmit">
-            <input type="file" name="image" onChange={handleFileChange} />
-            <button type="submit" className="submitButton">Submit</button>
+        <main>
+      <section style={{ marginTop: "10em" }}>
+        <div className="trackingSide">
+            <form onSubmit={handleSubmit}>
+                <input type="file" onChange={handleFileChange} />
+                <button type="submit">Submit</button>
             </form>
         </div>
+        <div className="nutritionalSide">
+            
+        </div>
+        
+      </section>
+      
+    </main>
     );
 }
