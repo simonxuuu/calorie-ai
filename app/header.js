@@ -20,9 +20,9 @@ export default function Header() {
         />
         </div>
         <div style={{gap:'1.5em',display:'flex'}}>
-        <button onClick={()=>{document.getElementById("landing0").scrollIntoView({block: "center"}); }}className='headerBtn'>Why us</button>
-        <button onClick={()=>{document.getElementById("landing1").scrollIntoView({block: "center"}); }}className='headerBtn'>Test</button>
-        <button className='headerBtn'>Test</button>
+        <button onClick={()=>{document.getElementById("landing0").scrollIntoView({block: "center"}); }}className='headerBtn'>Why us</button> 
+        <button onClick={()=>{document.getElementById("landing1").scrollIntoView({block: "center"}); }}className='headerBtn'>Clarity</button>
+        <button onClick={()=>{document.getElementById("landing3").scrollIntoView({block: "center"}); }}className='headerBtn' >Insights</button>
         </div>
         <button className='loginBtn'>Get Started</button>
       </header>
