@@ -77,6 +77,25 @@ header {
   padding-left: 1em;
   padding-right: 1em;
 }
+footer{
+  margin:0;
+  margin-top: 5em;
+  border:0;
+  bottom:0;
+  box-sizing: border-box;
+  background:var(--charcoal);
+  width:100vw;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+  padding : 2em;
+  padding-top:3em; padding-bottom:3em;
+}
+.footerBtn{
+  color:var(--white);
+  font-size: 1.5em;
+  
+}
 button {
   border:0; cursor: pointer;
   padding:0; margin:0;
@@ -94,22 +113,23 @@ button {
 }
 
 .loginBtn {
-  font-size: 0.8em;
+  font-size: 1em;
   background-color: var(--charcoal);
   border-radius: 0.3em;
   color: var(--white);
-  padding:0.4em;
+  padding:0.5em;
   padding-left:1em;
   padding-right:1em;
 }
 .generalButton{
-  font-size: 0.8em;
+  font-size: 1em;
   background-color: var(--charcoal);
   border-radius: 0.3em;
   color: var(--white);
-  padding:0.4em;
+  padding:0.6em;
   padding-left:1em;
   padding-right:1em;
+  margin-bottom: 1.5em;
 }
 section {
   width:100vw;
@@ -151,7 +171,7 @@ section {
   }
   .subHeading {
     
-    max-width: 100%;
+    max-width: 95%;
   }
   .generalButton {
     font-size: 1em;

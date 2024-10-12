@@ -9,8 +9,8 @@ export default function Header() {
       <header>
         <button id='headerTitle' onClick={()=>{router.push('/');}}>Calorie AI</button>
         <div style={{gap:'1.5em',display:'flex'}}>
-        <button className='headerBtn'>Test</button>
-        <button className='headerBtn'>Test</button>
+        <button onClick={()=>{document.getElementById("landing0").scrollIntoView({block: "center"}); }}className='headerBtn'>Why us</button>
+        <button onClick={()=>{document.getElementById("landing1").scrollIntoView({block: "center"}); }}className='headerBtn'>Test</button>
         <button className='headerBtn'>Test</button>
         </div>
         <button className='loginBtn'>Login</button>
