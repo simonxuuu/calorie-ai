@@ -32,7 +32,7 @@ export default function Header() {
         <button onClick={()=>{if(pathname != '/'){router.push('/'); return;} document.getElementById("landing3").scrollIntoView({block: "center"}); }}className='headerBtn' >Insights</button>
         <button onClick={()=>{router.push('/track')}}className='headerBtn' >Track</button>
         </div>
-        <button onClick={()=>{appContext.loggedIn ? router.push('/track') : router.push('/login')}}className='loginBtn'>{appContext.loggedIn ? 'Your scans' : 'Login'}</button>
+        <button onClick={()=>{router.push('/track')}}className='loginBtn'>Scan</button>
       </header>
     );
   }
