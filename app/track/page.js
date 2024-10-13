@@ -33,7 +33,8 @@ export default function Track() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError("Loading..."); // Set error to "Loading..." when form is submitted
+        setError()
+        // setError("Loading..."); // Set error to "Loading..." when form is submitted
         
         try {
             const response = await fetch('/api/getNutritionalData', {
@@ -67,7 +68,7 @@ export default function Track() {
             setDataReceived(true);
             setError(""); // Clear error on success
         } catch (error) {
-            setError("Please try again!");
+            setError("Error: " + error.message);
             console.error('Error:', error);
         }
     };
