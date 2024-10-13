@@ -2,10 +2,11 @@
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-
+import { AppContext } from './appContext';
+import { useContext } from 'react';
 
 export default function Header() {
-
+    const appContext = useContext(AppContext);
     const router = useRouter();
     const pathname = usePathname();
     return (
@@ -31,7 +32,7 @@ export default function Header() {
         <button onClick={()=>{if(pathname != '/'){router.push('/'); return;} document.getElementById("landing1").scrollIntoView({block: "center"}); }}className='headerBtn'>Clarity</button>
         <button onClick={()=>{if(pathname != '/'){router.push('/'); return;} document.getElementById("landing3").scrollIntoView({block: "center"}); }}className='headerBtn' >Insights</button>
         </div>
-        <button onClick={()=>{router.push('/track')}}className='loginBtn'>Get Started</button>
+        <button onClick={()=>{appContext.loggedIn ? router.push('/track') : router.push('/login')}}className='loginBtn'>{appContext.loggedIn ? 'Your scans' : 'Login'}</button>
       </header>
     );
   }

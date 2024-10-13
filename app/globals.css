@@ -64,7 +64,7 @@ html{
   overflow-y: scroll;
 }
 main {
-  min-height: calc(100vh - 22em);
+  min-height: 100vh;
 }
 header {
   z-index: 1;
@@ -238,7 +238,22 @@ section {
   padding:0;
   
 }
-
+.googleLogin{
+  background: var(--white);
+  align-items: center;
+  width:fit-content;
+  padding: 1em;
+  
+  font-size: 1em;
+  border: 0.1em solid var(--darkGrey);
+  border-radius: 1em;
+  
+}
+.loginPage{
+  width: 100vw;
+  display: flex;
+  align-items: center; justify-content: center; flex-direction: column;
+}
 .sectionContentRight{
   margin:0;
   padding:0;
