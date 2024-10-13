@@ -322,6 +322,13 @@ section {
       height: auto; /* Allow height to adjust based on content */
   }
 
+  .header-button {
+    color: inherit; /* Inherit color from parent or set a specific color */
+    background-color: transparent; /* Remove any background color */
+    border: none; /* Remove any border */
+    text-decoration: none; /* Remove underline from links */
+}
+
   .trackingSide, .nutritionalSide {
       max-width: 100%;
       padding: 10px;
