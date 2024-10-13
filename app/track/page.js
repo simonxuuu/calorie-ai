@@ -1,5 +1,5 @@
 "use client"
-import { useRef,    useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from "next/image";
 
 export default function Track() {
@@ -67,7 +67,7 @@ export default function Track() {
             setDataReceived(true);
             setError(""); // Clear error on success
         } catch (error) {
-            setError("Please try again!");
+            setError("Error: " + error.message);
             console.error('Error:', error);
         }
     };
