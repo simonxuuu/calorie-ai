@@ -14,14 +14,20 @@ export async function POST(req) {
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         try {
         const result = await model.generateContent([
-            "Generate precise nutritional data for this image. Don't send new lines. If there are multiple food items, add them all together and call it an assortment of whatever it is. Return only 1 json. Add feedback in meal talking about it for health. Format: {foodName: 'foodname', calories: 0, carbs: 0, fat: 0, protein: 0, feedback: ''} If the image is not edible, return {name: 'NA'}",
+          
+            "Generate precise nutritional data for this image. Don't send new lines. Capitalize food name properly. If there are multiple food items, add them all together and call it an assortment of whatever it is. Return only 1 json. Add feedback in meal talking about it for health. Format: {foodName: 'foodname', calories: 0, carbs: 0, fat: 0, protein: 0, feedback: ''} If the image is not edible, return {name: 'NA'}",
             { 
               inlineData: {
                 data: stringBase64,
                 mimeType: imageType
               }
             }
-          ]);
+          ], {
+            generationConfig: {
+              temperature: 0.2,
+              maxOutputTokens: 1000
+            }
+          });
 
           
           

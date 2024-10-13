@@ -133,6 +133,11 @@ button {
 
 .nutritionalSide {
   max-width: 50%;
+  margin-right: 1vh;
+}
+
+.feedback {
+  width: 75%;
 }
 
 .submittedImage {
