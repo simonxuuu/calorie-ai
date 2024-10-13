@@ -14,7 +14,7 @@ export async function POST(req) {
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         try {
         const result = await model.generateContent([
-            "Analyze the contents of the image. If it's not a food/beverage/consumable, return the json {'error' : 'Not a food.'}.Otherwise, return a json like this: {'foodData':{'foodName':foodname,'calories':calories,'protein':protein,'carbohydrates':carbohydrates,'fats':fats}} but replace the json values with the actual predicted/estimated values of the food or drink shown.",
+            "Generate precise nutritional data for this image. Format: {name: 'foodname', calories: 0, carbs: 0, fat: 0, protein: 0} If the image is not edible, return {name: 'NA'}",
             {
               inlineData: {
                 data: stringBase64,
@@ -22,7 +22,10 @@ export async function POST(req) {
               }
             }
           ]);
-          
+          const res = JSON.parse(result.response.text());
+          if (res.name == 'NA') {
+            throw new Error("The image is not edible.");
+          }
           return new Response(JSON.stringify({ result : result.response.text() }), { status: 200 });
         } catch (error) {
             // Error handling
