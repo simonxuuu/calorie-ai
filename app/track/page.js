@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { useRef,    useState } from 'react';
 import Image from "next/image";
 
 export default function Track() {
@@ -8,6 +8,7 @@ export default function Track() {
     const [dataReceived, setDataReceived] = useState(false);
     const [additionalInput, setAdditionalInput] = useState("");
     const [error, setError] = useState("");
+    const fileInputRef = useRef(null);
     const [nutritionalValues, setNutritionalValues] = useState({
         foodName: "",
         calories: 0,
@@ -75,15 +76,30 @@ export default function Track() {
         <main>
             <section style={{ marginTop: "10em" }}>
                 <div className="trackingPage">
+                    
                     <div className="trackingSide">
                     <h1 className='header'>Track your Calories</h1>
                     <span className='error'>{error}</span>
-                    <form className="trackingSide" onSubmit={handleSubmit}>
-                        <label htmlFor="file" style={{marginBottom: '1rem', marginTop: '1em'}}>Upload an image of your food</label>
+                    <form className="trackingSideFORM" onSubmit={handleSubmit}>
+                        <label htmlFor="file" style={{marginBottom: '1rem', marginTop: '1em'}}>Upload a clear image of your food and add additional information if needed</label>
                         <input type="text" id="additionalInput" value={additionalInput} onChange={e => setAdditionalInput(e.target.value)} placeholder="Enter additional information" name="additionalInput"/>
-                        <input type="file" onChange={handleFileChange} />
+                        <div
+                                className="file-upload"
+                                onClick={() => fileInputRef.current.click()}
+                                style={{ cursor: 'pointer' }}
+                            >
+                                <p>Click to upload or drag and drop</p>
+                                <input
+                                    type="file"
+                                    ref={fileInputRef}
+                                    onChange={handleFileChange}
+                                    accept="image/*"
+                                    style={{ display: "none" }}
+                                />
+                            </div>
                         <button className='generalButton' type="submit">Submit</button>
                     </form>
+                    
                     <Image 
                         style={{ 
                             borderRadius: '1rem',
@@ -99,6 +115,7 @@ export default function Track() {
                         alt={'file'}
                         src={imagePrev}
                     />
+                 
                     </div>
                     
                     {dataReceived && (
