@@ -16,7 +16,7 @@ const router = useRouter();
         <div className="sectionContentRight">
           <h1 className="heading">Track your calories, with one click.</h1>
           <h2 className="subHeading">
-            Your journey to a healthier lifestyle starts here.
+            Your journey to a healthier lifestyle starts here. We know how hard it can be to keep track of what you eat, so we made it easy for you.
           </h2>
           <button onClick={()=>{router.push('/track')}}className="generalButton">Get Started</button>
         </div>
@@ -39,7 +39,7 @@ const router = useRouter();
         <div className="sectionContentLeft">
           <h1 className="heading">Drastically improve your health & wellbeing</h1>
           <h2 className="subHeading">
-           By being able to see what is in your food, you will be able to get a clear picture about what you are eating, and how it's affecting your day-to-day life.
+           By being able to see what is in your food, you will be able to get a clear picture about what you are eating, and how it's affecting your day-to-day life. Your diet impacts every aspect of your life, from your sleep, your wellbeing, and your energy levels.
           </h2>
          
         </div>
@@ -50,7 +50,7 @@ const router = useRouter();
         <div style={{margin:0,marginLeft:0}}className="sectionContentLeft">
           <h1 style={{textAlign:'center'}}className="heading">Click. Wait. See. </h1>
           <h2 style={{textAlign:'center'}} className="subHeading">
-            Effortless tracking for a better you.
+            Effortless tracking for a better you. 
           </h2>
          
         </div>
@@ -61,7 +61,7 @@ const router = useRouter();
         <div className="sectionContentRight">
           <h1 className="heading">Understand what is in your food</h1>
           <h2 className="subHeading">
-            Your journey to a healthier lifestyle starts here.
+            Your journey to a healthier lifestyle starts here. Know what you're eating and how it's affecting your health. Tracking your nutrition is crucial to improving your health.
           </h2>
           
         </div>
