@@ -6,12 +6,15 @@ export default function Track() {
     const [file, setFile] = useState(null);
     const [imagePrev, setImagePrev] = useState('/images/food1.jpg');
     const [dataReceived, setDataReceived] = useState(false);
+    const [additionalInput, setAdditionalInput] = useState("");
+    const [error, setError] = useState("");
     const [nutritionalValues, setNutritionalValues] = useState({
         foodName: "",
         calories: 0,
         carbs: 0,
         fat: 0,
         protein: 0,
+        health_score: 0,
         feedback: ""
     });
 
@@ -29,11 +32,15 @@ export default function Track() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setError("Loading..."); // Set error to "Loading..." when form is submitted
         
         try {
             const response = await fetch('/api/getNutritionalData', {
                 method: 'POST',
-                body: imagePrev
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ imagePrev, additionalInput })
             });
         
             if (!response.ok) {
@@ -47,17 +54,19 @@ export default function Track() {
             const jsonString = data.result.replace(/```json|```/g, '').replace(/'/g, '"');
             const parsedData = JSON.parse(jsonString);
         
-
             setNutritionalValues({
                 foodName: parsedData.foodName,
                 calories: Number(parsedData.calories),
                 carbs: Number(parsedData.carbs),
                 fat: Number(parsedData.fat),
                 protein: Number(parsedData.protein),
-                feedback: parsedData.feedback
+                feedback: parsedData.feedback,
+                health_score: parsedData.health_score
             });
             setDataReceived(true);
+            setError(""); // Clear error on success
         } catch (error) {
+            setError("Please try again!");
             console.error('Error:', error);
         }
     };
@@ -68,7 +77,10 @@ export default function Track() {
                 <div className="trackingPage">
                     <div className="trackingSide">
                     <h1 className='header'>Track your Calories</h1>
+                    <span className='error'>{error}</span>
                     <form className="trackingSide" onSubmit={handleSubmit}>
+                        <label htmlFor="file" style={{marginBottom: '1rem', marginTop: '1em'}}>Upload an image of your food</label>
+                        <input type="text" id="additionalInput" value={additionalInput} onChange={e => setAdditionalInput(e.target.value)} placeholder="Enter additional information" name="additionalInput"/>
                         <input type="file" onChange={handleFileChange} />
                         <button className='generalButton' type="submit">Submit</button>
                     </form>
@@ -107,6 +119,10 @@ export default function Track() {
                             <span className="nutritionalValues">Protein: {nutritionalValues.protein}g</span>
                             <div className="emptyProgressBar">
                                 <div className="filledProgressBar" style={{ width: `${nutritionalValues.protein / 50 * 100}%`, backgroundColor: '#3498db' }}></div>
+                            </div>
+                            <span className="nutritionalValues">Health Score: {nutritionalValues.health_score} / 10</span>
+                            <div className="emptyProgressBar">
+                                <div className="filledProgressBar" style={{ width: `${nutritionalValues.health_score / 10 * 100}%`, backgroundColor: 'green' }}></div>
                             </div>
                             <p className="feedback">{nutritionalValues.feedback}</p>
                         </div>
