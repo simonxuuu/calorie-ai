@@ -124,16 +124,28 @@ button {
 }
 
 .trackingSide, .nutritionalSide {
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   flex-direction: column;
   margin-top: 0;
   align-items: center;
-  padding: 20px;
+  padding: 1rem;
 }
 
+
 .trackingSide {
-  max-width: 50%;
+  max-width: 75%;
+  width: 50%;
+  border-radius: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #edecec;
+  padding-bottom: 2rem;
+}
+
+.trackingSideFORM {
+  max-width: 75%;
+  display: flex;
+  flex-direction: column; 
 }
 
 .nutritionalSide {
@@ -155,7 +167,7 @@ button {
 
 #additionalInput {
   margin-bottom: 1em;
-  width: 100%;
+  width: 95%;
   padding: 0.75em 1em; 
   border: 1px solid var(--darkGrey);
   border-radius: 0.5em;
@@ -255,6 +267,25 @@ section {
   font-size: 1.5em;
   display: none;
 }
+
+.file-upload {
+  border: 2px dashed #cbd5e0;
+  border-radius: 4px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  
+  transition: all 1s ease;
+}
+
+.file-upload:hover {
+  border: 2px dashed #2b3743;
+}
+
+.file-upload p {
+  margin: 0;
+  color: #718096;
+}
 @media only screen and (min-width: 383px) {
   .loginBtn {
     font-size: 1em;
@@ -292,7 +323,7 @@ section {
     padding-right: 10em;
   }
   .headerBtn {
-    font-size: 1.1em;
+    font-size: 1.2em;
   }
   .subHeading {
     
@@ -323,7 +354,11 @@ section {
     padding-right:3em;
     flex-direction: row;
   }
+
+
 }
+
+
 
 @media only screen and (max-width: 768px) {
   .trackingPage {
@@ -333,6 +368,7 @@ section {
       overflow-y: auto;
       height: auto; /* Allow height to adjust based on content */
   }
+  
 
   .headerBtn {
     color: inherit; 
@@ -343,7 +379,13 @@ section {
 
   .trackingSide, .nutritionalSide {
       max-width: 100%;
-      padding: 10px;
+      width: 80%;
+      padding: 1rem;
+      padding-bottom: 2rem;
+  }
+
+  .nutritionalSide {
+    width: 95%;
   }
 
   .submittedImage {
