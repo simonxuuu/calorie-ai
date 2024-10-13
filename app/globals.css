@@ -322,11 +322,11 @@ section {
       height: auto; /* Allow height to adjust based on content */
   }
 
-  .header-button {
-    color: inherit; /* Inherit color from parent or set a specific color */
-    background-color: transparent; /* Remove any background color */
-    border: none; /* Remove any border */
-    text-decoration: none; /* Remove underline from links */
+  .headerBtn {
+    color: inherit; 
+    background-color: transparent; 
+    border: none; 
+    text-decoration: none; 
 }
 
   .trackingSide, .nutritionalSide {
