@@ -26,7 +26,7 @@ export default function Header() {
           src={"/favicon.ico"}
         />
         </div>
-        <div style={{gap:'1.5em',display:'flex'}}>
+        <div style={{gap:'1em',display:'flex'}}>
         <button onClick={()=>{if(pathname != '/'){router.push('/'); return;} document.getElementById("landing0").scrollIntoView({block: "center"}); }}className='headerBtn'>Why us</button> 
         <button onClick={()=>{if(pathname != '/'){router.push('/'); return;} document.getElementById("landing1").scrollIntoView({block: "center"}); }}className='headerBtn'>Clarity</button>
         <button onClick={()=>{if(pathname != '/'){router.push('/'); return;} document.getElementById("landing3").scrollIntoView({block: "center"}); }}className='headerBtn' >Insights</button>
