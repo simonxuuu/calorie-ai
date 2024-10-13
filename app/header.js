@@ -30,6 +30,7 @@ export default function Header() {
         <button onClick={()=>{if(pathname != '/'){router.push('/'); return;} document.getElementById("landing0").scrollIntoView({block: "center"}); }}className='headerBtn'>Why us</button> 
         <button onClick={()=>{if(pathname != '/'){router.push('/'); return;} document.getElementById("landing1").scrollIntoView({block: "center"}); }}className='headerBtn'>Clarity</button>
         <button onClick={()=>{if(pathname != '/'){router.push('/'); return;} document.getElementById("landing3").scrollIntoView({block: "center"}); }}className='headerBtn' >Insights</button>
+        <button onClick={()=>{router.push('/track')}}className='headerBtn' >Track</button>
         </div>
         <button onClick={()=>{router.push('/track')}}className='loginBtn'>Get Started</button>
       </header>
