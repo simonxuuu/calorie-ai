@@ -9,12 +9,20 @@ export async function POST(req) {
         if (!imagePrev) {
             throw new Error("No image data provided");
         }
+
         
-        const imageType = imagePrev.split(';base64,')[0].split(':')[1].trim().toString();
-        const stringBase64 = imagePrev.split(';base64,')[1].toString();
+        
+        const base64Parts = imagePrev.split(';base64,');
+        if (base64Parts.length !== 2) {
+            throw new Error("Invalid image data format");
+        }
+
+        const imageType = base64Parts[0].split(':')[1].trim();
+        const stringBase64 = base64Parts[1];
+
         const genAI = new GoogleGenerativeAI(api);
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-        console.log(additionalInput)
+        console.log(additionalInput);
         try {
             const result = await model.generateContent([
                 "Generate precise nutritional data for this image. Don't send new lines." + additionalInput + "Capitalize food name properly. If there are multiple food items, add them all together and call it an assortment of whatever it is. Return only 1 json. Add well written thoughtful feedback in meal talking about it for health. Format: {\"foodName\": \"foodname\", \"calories\": 0, \"carbs\": 0, \"fat\": 0, \"protein\": 0, \"health_score\" : 0 (out of 10), \"feedback\": \"\"} If the image is not edible, return {\"name\": \"NA\"}",
