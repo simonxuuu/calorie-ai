@@ -324,6 +324,13 @@ section {
       height: auto; /* Allow height to adjust based on content */
   }
 
+  .headerBtn {
+    color: inherit; 
+    background-color: transparent; 
+    border: none; 
+    text-decoration: none; 
+}
+
   .trackingSide, .nutritionalSide {
       max-width: 100%;
       padding: 10px;
@@ -331,6 +338,7 @@ section {
 
   .submittedImage {
       width: 100%;
+      z-index: 0;
       height: auto;
   }
 } 
