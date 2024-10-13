@@ -14,18 +14,22 @@ export async function POST(req) {
         const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
         try {
         const result = await model.generateContent([
-            "Generate precise nutritional data for this image. Format: {name: 'foodname', calories: 0, carbs: 0, fat: 0, protein: 0} If the image is not edible, return {name: 'NA'}",
-            {
+            "Generate precise nutritional data for this image. Don't send new lines. If there are multiple food items, add them all together and call it an assortment of whatever it is. Return only 1 json. Add feedback in meal talking about it for health. Format: {foodName: 'foodname', calories: 0, carbs: 0, fat: 0, protein: 0, feedback: ''} If the image is not edible, return {name: 'NA'}",
+            { 
               inlineData: {
                 data: stringBase64,
                 mimeType: imageType
               }
             }
           ]);
+
+          console.log(result.response.text());
+          
           const res = JSON.parse(result.response.text());
-          if (res.name == 'NA') {
-            throw new Error("The image is not edible.");
+          if(res.name === 'NA') {
+              throw new Error('This is not edible');
           }
+      
           return new Response(JSON.stringify({ result : result.response.text() }), { status: 200 });
         } catch (error) {
             // Error handling
