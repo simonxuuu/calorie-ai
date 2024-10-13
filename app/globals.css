@@ -160,6 +160,7 @@ button {
 
 .loginBtn {
   font-size: 1em;
+  font-weight: 550;
   background-color: var(--charcoal);
   border-radius: 0.3em;
   color: var(--white);
@@ -244,7 +245,7 @@ section {
     padding-right: 4em;
   }
   .headerBtn {
-    font-size: 1.5em;
+    font-size: 1.2em;
   }
   .subHeading {
     

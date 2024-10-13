@@ -37,10 +37,9 @@ export default function Track() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-
-        fetch('/api/nutritionalValues', {
+        fetch('/api/getNutritionalData', {
             method: 'POST',
-            body: imagePrev.split(',')[1],
+            body: imagePrev
           })
           .then(response => {
             if (!response.ok) {
