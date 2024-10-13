@@ -67,6 +67,7 @@ main {
   min-height: calc(100vh - 22em);
 }
 header {
+  z-index: 1;
   margin:0;
   border:0;
   position:fixed;
@@ -195,14 +196,14 @@ button {
 }
 
 .loginBtn {
-  font-size: 1em;
+  font-size: 0.85em;
   font-weight: 550;
   background-color: var(--charcoal);
   border-radius: 0.3em;
   color: var(--white);
-  padding:0.5em;
-  padding-left:1em;
-  padding-right:1em;
+  padding:0.4em;
+  padding-left:0.5em;
+  padding-right:0.5em;
 }
 .generalButton{
   font-size: 1em;
@@ -254,6 +255,15 @@ section {
   font-size: 1.5em;
   display: none;
 }
+@media only screen and (min-width: 383px) {
+  .loginBtn {
+    font-size: 1em;
+    padding:0.5em;
+    padding-left:1em;
+    padding-right:1em;
+  }
+}
+
 @media only screen and (min-width: 500px) {
   #headerTitle{
     display: block;
@@ -338,7 +348,7 @@ section {
 
   .submittedImage {
       width: 100%;
-      z-index: 0;
+      
       height: auto;
   }
 } 
