@@ -1,5 +1,5 @@
 "use client"
-import { useRef,    useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from "next/image";
 
 export default function Track() {
@@ -33,8 +33,7 @@ export default function Track() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError()
-        // setError("Loading..."); // Set error to "Loading..." when form is submitted
+        setError("Loading..."); // Set error to "Loading..." when form is submitted
         
         try {
             const response = await fetch('/api/getNutritionalData', {
