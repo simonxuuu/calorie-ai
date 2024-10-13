@@ -23,9 +23,9 @@ export async function POST(req) {
             }
           ]);
 
-          console.log(result.response.text());
           
-          const res = JSON.parse(result.response.text());
+          
+          const res = await JSON.parse(result.response.text());
           if(res.name === 'NA') {
               throw new Error('This is not edible');
           }
