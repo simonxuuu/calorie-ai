@@ -120,7 +120,9 @@ export default function Track() {
                     
                     {dataReceived && (
                         <div className="nutritionalSide">
+                             
                             <h2 className="header">{nutritionalValues.foodName}</h2>
+                            <button className='generalButton' style={{marginTop: "1em"}}>Log food</button>
                             <span className="nutritionalValues">Calories: {nutritionalValues.calories}</span>
                             <div className="emptyProgressBar">
                                 <div className="filledProgressBar" style={{ width: `${nutritionalValues.calories / 2000 * 100}%`, backgroundColor: '#76c7c0' }}></div>
