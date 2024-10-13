@@ -74,8 +74,10 @@ export default function Track() {
                     </form>
                     <Image 
                         style={{ 
+                            borderRadius: '1rem',
                             display: `${file ? 'block' : 'none'}`, 
                             maxWidth: '100%', 
+                            width: '75%',
                             height: 'auto', 
                             objectFit: 'contain' 
                         }}
@@ -92,24 +94,25 @@ export default function Track() {
                             <h2 className="header">{nutritionalValues.foodName}</h2>
                             <span className="nutritionalValues">Calories: {nutritionalValues.calories}</span>
                             <div className="emptyProgressBar">
-                                <div className="filledProgressBar" style={{ width: `${nutritionalValues.calories / 2000 * 100}%` }}></div>
+                                <div className="filledProgressBar" style={{ width: `${nutritionalValues.calories / 2000 * 100}%`, backgroundColor: '#76c7c0' }}></div>
                             </div>
                             <span className="nutritionalValues">Carbs: {nutritionalValues.carbs}g</span>
                             <div className="emptyProgressBar">
-                                <div className="filledProgressBar" style={{ width: `${nutritionalValues.carbs / 300 * 100}%` }}></div>
+                                <div className="filledProgressBar" style={{ width: `${nutritionalValues.carbs / 300 * 100}%`, backgroundColor: '#f39c12' }}></div>
                             </div>
                             <span className="nutritionalValues">Fat: {nutritionalValues.fat}g</span>
                             <div className="emptyProgressBar">
-                                <div className="filledProgressBar" style={{ width: `${nutritionalValues.fat / 70 * 100}%` }}></div>
+                                <div className="filledProgressBar" style={{ width: `${nutritionalValues.fat / 70 * 100}%`, backgroundColor: '#e74c3c' }}></div>
                             </div>
                             <span className="nutritionalValues">Protein: {nutritionalValues.protein}g</span>
                             <div className="emptyProgressBar">
-                                <div className="filledProgressBar" style={{ width: `${nutritionalValues.protein / 50 * 100}%` }}></div>
+                                <div className="filledProgressBar" style={{ width: `${nutritionalValues.protein / 50 * 100}%`, backgroundColor: '#3498db' }}></div>
                             </div>
                             <p className="feedback">{nutritionalValues.feedback}</p>
                         </div>
                     )}
                 </div>
+                <br></br>
             </section>
         </main>
     )};
