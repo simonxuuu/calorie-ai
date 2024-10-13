@@ -9,7 +9,10 @@ export default function Header() {
     const router = useRouter();
     const pathname = usePathname();
     return (
-      <header>
+      <header style={{
+       
+    
+    }}>
         <div onClick={()=>{router.push('/');}} style={{display: 'flex',
   alignItems: 'center',
   gap:'0.3em',justifyContent:'center'}}>

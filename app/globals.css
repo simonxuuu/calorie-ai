@@ -139,6 +139,7 @@ button {
   border-radius: 1rem;
   border: 1px solid rgba(0, 0, 0, 0.2);
   background-color: #edecec;
+  padding-bottom: 2rem;
 }
 
 .trackingSideFORM {
@@ -322,7 +323,7 @@ section {
     padding-right: 10em;
   }
   .headerBtn {
-    font-size: 1.1em;
+    font-size: 1.2em;
   }
   .subHeading {
     
@@ -367,6 +368,7 @@ section {
       overflow-y: auto;
       height: auto; /* Allow height to adjust based on content */
   }
+  
 
   .headerBtn {
     color: inherit; 
@@ -377,7 +379,13 @@ section {
 
   .trackingSide, .nutritionalSide {
       max-width: 100%;
-      padding: 10px;
+      width: 80%;
+      padding: 1rem;
+      padding-bottom: 2rem;
+  }
+
+  .nutritionalSide {
+    width: 95%;
   }
 
   .submittedImage {
