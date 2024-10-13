@@ -52,7 +52,8 @@ export default function Track() {
             console.log('Success:', data);
 
             // Extract JSON string correctly
-            const jsonString = data.result.replace(/```json|```/g, '').replace(/'/g, '"');
+            const jsonString = data.result;
+            console.log(jsonString);
             const parsedData = JSON.parse(jsonString);
         
             setNutritionalValues({
