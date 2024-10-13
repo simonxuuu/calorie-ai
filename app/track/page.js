@@ -25,8 +25,6 @@ export default function Track() {
     const reader = new FileReader();
     
     reader.onloadend = () => {
-        console.log(reader.result);
-        
         setImagePrev(reader.result);
     };
     
