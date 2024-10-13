@@ -107,6 +107,8 @@ button {
   font-weight: 600;
 }
 .headerBtn {
+  -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   font-size: 1em;
   font-weight: 400;
 }
@@ -235,7 +237,7 @@ section {
   padding-left: 1em;
 }
 .showcaseImage{
-  
+  object-fit: cover;
   width:fit-content;
   height:25em;
   border-radius: 2em;
@@ -276,11 +278,11 @@ section {
   header {
     
     padding : 2em;
-    padding-left: 4em;
-    padding-right: 4em;
+    padding-left: 10em;
+    padding-right: 10em;
   }
   .headerBtn {
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
   .subHeading {
     
