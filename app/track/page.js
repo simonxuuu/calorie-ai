@@ -54,7 +54,7 @@ export default function Track() {
             // Extract JSON string correctly
             const jsonString = data.result;
             console.log(jsonString);
-            const parsedData = JSON.parse(jsonString);
+            const parsedData = jsonString;
         
             setNutritionalValues({
                 foodName: parsedData.foodName,
