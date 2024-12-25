@@ -32,7 +32,7 @@ export async function POST(req) {
                     seed : 42069
                 }
             });
-            let responseText = result.response.text().replace(/```/g, '').replace(/\n/g, '').replace('json'/g, '');
+            let responseText = result.response.text().replace(/```/g, '').replace(/\n/g, '').replace(/json'/g, ''); // Hah
             console.log(responseText);
             const res = await JSON.parse(responseText);
             if (res.name === 'NA') {
