@@ -32,14 +32,14 @@ export async function POST(req) {
                     seed : 42069
                 }
             });
-            let responseText = result.response.text().replace(/```/g, '').replace(/\n/g, '').replace(/json'/g, ''); // Hah
+            let responseText = result.response.text().replace(/```/g, '').replace(/\n/g, '').replace(/json\{/g, '{'); // Hah
             console.log(responseText);
-            const res = await JSON.parse(responseText);
+            const res = JSON.parse(responseText);
             if (res.name === 'NA') {
                 throw new Error('This is not edible');
             }
 
-            return new Response(JSON.stringify({ result: responseText }), { status: 200 });
+            return new Response(JSON.stringify({ result: res }), { status: 200 });
         } catch (error) {
             console.error("Error generating content:", error);
             return new Response(JSON.stringify({ error: error.message }), { status: 500 });
