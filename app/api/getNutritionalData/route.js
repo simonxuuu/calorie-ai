@@ -28,8 +28,7 @@ export async function POST(req) {
             ], {
                 generationConfig: {
                     temperature: 0,
-                    maxOutputTokens: 2000,
-                    seed : 42069
+                    maxOutputTokens: 2000
                 }
             });
             let responseText = result.response.text();
