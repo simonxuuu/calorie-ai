@@ -17,7 +17,7 @@ export async function POST(req) {
         console.log(additionalInput)
         try {
             const result = await model.generateContent([
-           "Generate precise nutritional data for this image. Don't send new lines. " + additionalInput + " Capitalize food name properly. If there are multiple food items, add them all together. Return only 1 JSON object. Add well-written, thoughtful, professional feedback in the meal talking about it for health. Format: {foodName: \"foodname\", calories: \"0\", carbs: \"0\", fat: \"0\", protein: \"0\", health_score: \"0 (out of 10)\", feedback: \"\"} If the image is not edible, return {foodName: \"NA\"}.",
+           "Generate precise nutritional data for this image. Don't send new lines. " + additionalInput + " Capitalize food name properly. If there are multiple food items, add them all together. Return only 1 JSON object. Add well-written, thoughtful, professional feedback in the meal talking about it for health. Do not add g after macros. Format: {foodName: \"foodname\", calories: \"0\", carbs: \"0\", fat: \"0\", protein: \"0\", health_score: \"0 (out of 10)\", feedback: \"\"} If the image is not edible, return {foodName: \"NA\"}.",
                 { 
                     inlineData: {
                         data: stringBase64,
