@@ -19,7 +19,7 @@ export default function Home() {
     
       return (
         <main className='loginPage'>
-            <h1 className="subHeading">Login for a bettter experience</h1>
+            <h1 className="subHeading">Register for a bettter experience</h1>
           <button type="button" onClick={handleSubmitGoogle} style={{display:'flex',alignContent:'center',justifyContent:'center',fontWeight:'500'}}className="googleLogin">
             
             <img
