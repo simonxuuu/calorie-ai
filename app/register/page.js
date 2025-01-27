@@ -1,38 +1,85 @@
 'use client'
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-import { AppContext } from "../appContext";
-import { useContext } from "react";
-export default function Home() {
+import { useState } from "react";
+import supabase from "../supabaseClient";
 
-    const router = useRouter();
-    const appContext = useContext(AppContext);
-    
-    const handleSubmitGoogle = (event) => {
-        appContext.loginAccountWithGoogle(event).then((response) => {
-          console.log(response);
-          if (response == "Success!") {
-            router.push("/track");
-          }
-        });
-      };
-    
-      return (
-        <main className='loginPage'>
-            <h1 className="subHeading">Register for a bettter experience</h1>
-          <button type="button" onClick={handleSubmitGoogle} style={{display:'flex',alignContent:'center',justifyContent:'center',fontWeight:'500'}}className="googleLogin">
-            
-            <img
-              width="20px"
-              style={{marginRight: "1em",marginTop:'0.1em' }}
-              alt="Google sign-in"
-              src="/google.png"
-            />
-            Login with Google
-            
-            </button>
-        </main>
-      );
+export default function Register() {
+  const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  const handleRegister = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    setError(null);
+
+    if (password !== confirmPassword) {
+      setError("Passwords do not match");
+      setLoading(false);
+      return;
     }
 
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      setLoading(false);
+      return;
+    }
 
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (error) throw error;
+      
+      if (data.user) {
+        router.push("/login");
+      }
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <main className='loginPage'>
+      <h1 className="subHeading">Create an account!</h1>
+      {error && <p className="errorText">{error}</p>}
+      <form onSubmit={handleRegister} className="loginForm">
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Confirm Password"
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          required
+        />
+        <button 
+          type="submit" 
+          className="loginButton"
+          disabled={loading}
+        >
+          {loading ? 'Creating account...' : 'Register'}
+        </button>
+      </form>
+    </main>
+  );
+}
