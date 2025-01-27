@@ -10,7 +10,7 @@ const AppProvider = ({ children }) => {
   const [userName, setUserName] = useState(null);
 
   return (
-    <AppContext.Provider value={{ loggedIn, loginAccountWithGoogle }}>
+    <AppContext.Provider value={{ loggedIn }}>
       {children}
     </AppContext.Provider>
   );
