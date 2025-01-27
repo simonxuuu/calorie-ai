@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.735.0",
     "@google/generative-ai": "^0.21.0",
+    "aws-sdk": "^2.1692.0",
     "browser-image-compression": "^2.0.2",
     "bun": "^1.1.30",
     "firebase": "^10.14.1",
@@ -22,5 +24,9 @@
     "react": "^18",
     "react-dom": "^18",
     "react-google-button": "^0.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "19.0.8",
+    "typescript": "5.7.3"
   }
 }
