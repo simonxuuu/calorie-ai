@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
+    "browser-image-compression": "^2.0.2",
     "bun": "^1.1.30",
     "firebase": "^10.14.1",
     "formidable": "^3.5.1",

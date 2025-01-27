@@ -1,6 +1,7 @@
 "use client"
 import { useRef, useState } from 'react';
 import Image from "next/image";
+import imageCompression from 'browser-image-compression';
 
 export default function Track() {
     const [file, setFile] = useState(null);
@@ -19,17 +20,32 @@ export default function Track() {
         feedback: ""
     });
 
-    const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setImagePrev(reader.result);
+    const handleFileChange = async (e) => {
+        const originalFile = e.target.files[0];
+        if (!originalFile) return;
+    
+        const options = {
+            maxSizeMB: 4, // Set maximum size to 4MB
+            maxWidthOrHeight: 1920, // Adjust as needed
+            useWebWorker: true
         };
-        reader.readAsDataURL(file);
-        setFile(file);
+    
+        try {
+            const compressedFile = await imageCompression(originalFile, options);
+            console.log('Compressed file:', compressedFile);
+    
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePrev(reader.result);
+            };
+            reader.readAsDataURL(compressedFile);
+            setFile(compressedFile);
+        } catch (error) {
+            console.error('Image compression failed:', error);
+            setError("Image compression failed: " + error.message);
+        }
     };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
