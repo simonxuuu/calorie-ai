@@ -7,12 +7,34 @@ const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const [userName, setUserName] = useState(null);
+  const [userEmail, setUserEmail] = useState(null);
+  const [userID, setUserID] = useState(null);
+
+  const updateSession = async () => {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (session) {
+      setLoggedIn(true);
+      setUserEmail(session.user.email);
+      setUserID(session.user.id);
+    } else {
+      setLoggedIn(false);
+      setUserEmail(null);
+      setUserID(null);
+    }
+  };
+
+  useEffect(() => {
+    updateSession(); // Call async fetch auth on load
+  }, []);
 
   return (
-    <AppContext.Provider value={{ loggedIn }}>
-      {children}
-    </AppContext.Provider>
+    <AppContext.Provider value={{
+       loggedIn,
+       userEmail,
+       userID,
+       updateSession }}>{children}</AppContext.Provider>
   );
 };
 

@@ -15,7 +15,7 @@ export default function Register() {
     event.preventDefault();
     setLoading(true);
     setError(null);
-
+    
     if (password !== confirmPassword) {
       setError("Passwords do not match");
       setLoading(false);
