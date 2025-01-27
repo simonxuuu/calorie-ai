@@ -1,49 +1,57 @@
+// app/appContext.js
 "use client";
 import React, { useEffect, createContext, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import {
-  auth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword, signInWithGoogle
-} from "./firebaseconfig";
+import supabase from "./supabaseClient";
 
 const AppContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [loggedIn,setLoggedIn]= useState(false);
-  const [uid,setUid] = useState(null);
-  const [isAuthButton,setIsAuthButton] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [uid, setUid] = useState(null);
+  const [isAuthButton, setIsAuthButton] = useState(false);
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
+    const session = supabase.auth.session();
+    if (session) {
+      setLoggedIn(true);
+      setUid(session.user.id);
+    } else {
+      console.log("Not logged in.");
+      setLoggedIn(false);
+    }
+
+    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
         setLoggedIn(true);
-        setUid(user.uid);
+        setUid(session.user.id);
       } else {
-        console.log("Not logged in.");
         setLoggedIn(false);
       }
     });
-    return () => unsubscribe();
+
+    return () => {
+      authListener.unsubscribe();
+    };
   }, []);
 
- 
-  function loginAccountWithGoogle(){
-    if(isAuthButton) return;
+  async function loginAccountWithGoogle() {
+    if (isAuthButton) return;
     setIsAuthButton(true);
-    return signInWithGoogle().then(async(res) =>{
-      if(res == "Error logging in with Google."){
-        return res;
-      }else{
-        setIsAuthButton(false);
-        return "Success!";
-      }
+    const { user, error } = await supabase.auth.signIn({
+      provider: 'google',
     });
+    if (error) {
+      console.error('Error during sign-in: ', error);
+      setIsAuthButton(false);
+      return "Error logging in with Google.";
+    } else {
+      setIsAuthButton(false);
+      return "Success!";
+    }
   }
+
   return (
-    <AppContext.Provider value={
-        { loggedIn,
-           loginAccountWithGoogle
-        }}>
+    <AppContext.Provider value={{ loggedIn, loginAccountWithGoogle }}>
       {children}
     </AppContext.Provider>
   );
