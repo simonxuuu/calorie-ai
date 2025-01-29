@@ -3,13 +3,36 @@ import { useRouter } from "next/navigation";
 import { useState, useEffect, useContext } from "react";
 import supabase from "../supabaseClient";
 import { AppContext } from "../appContext";
+
 export default function Home() {
   const router = useRouter();
 
   const { userEmail,updateSession } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+    
+    
+  const prismaTest = async () => {
+    try {
+        const response = await fetch('/api/dbAccess', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+    
+        const data = await response.json();
+        console.log('Success:', data);
 
+    } catch (error) {
+        
+        console.error('Error:', error);
+    }
+  } 
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -102,6 +125,7 @@ export default function Home() {
         </button>
       </form>
       <button onClick={handleLogout}>sign out</button>
+      <button onClick={prismaTest}>test prisma</button>
     </main>
   );
 }
