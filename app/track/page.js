@@ -2,8 +2,10 @@
 import { useRef, useState } from 'react';
 import Image from "next/image";
 import imageCompression from 'browser-image-compression';
+import { AppContext } from '../appContext';
 
 export default function Track() {
+    const context = useContext(AppContext);
     const [file, setFile] = useState(null);
     const [imagePrev, setImagePrev] = useState('/images/food1.jpg');
     const [dataReceived, setDataReceived] = useState(false);
@@ -57,7 +59,7 @@ export default function Track() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ imagePrev, additionalInput })
+                body: JSON.stringify({ imagePrev, additionalInput, jwt: context.jwt })
             });
         
             if (!response.ok) {
