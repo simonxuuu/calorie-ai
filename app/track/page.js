@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 import Image from "next/image";
 import imageCompression from 'browser-image-compression';
 import { AppContext } from '../appContext';
+import { useContext } from 'react';
 
 export default function Track() {
     const context = useContext(AppContext);
