@@ -52,7 +52,7 @@ export default function Track() {
         setError("Loading..."); // Set error to "Loading..." when form is submitted
         
         try {
-            const response = await fetch('/api/testS3Save', {
+            const response = await fetch('/api/getNutritionalData', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
