@@ -32,6 +32,7 @@ export default function Register() {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
+        email_confirm: true
       });
 
       if (error) throw error;
