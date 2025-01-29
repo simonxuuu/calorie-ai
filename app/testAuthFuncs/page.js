@@ -7,7 +7,7 @@ import { AppContext } from "../appContext";
 export default function Home() {
   const router = useRouter();
 
-  const { userEmail,updateSession } = useContext(AppContext);
+  const { userEmail,updateSession,jwt } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
     
@@ -16,6 +16,7 @@ export default function Home() {
     try {
         const response = await fetch('/api/dbAccess', {
             method: 'POST',
+            body: JSON.stringify({requestType : '', jwt: jwt }),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -74,8 +75,7 @@ export default function Home() {
     event.preventDefault();
     setLoading(true);
     setError(null);
-    const email = form.elements.email.value;
-    const password = form.elements.password.value;
+    
     try {
       const form = event.target;
       const email = form.elements.email.value;

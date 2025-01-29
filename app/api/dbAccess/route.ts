@@ -2,20 +2,27 @@ import { PrismaClient } from '@prisma/client';
 import supabase from '../../supabaseClient'
 
 export async function POST(req) {
-  //const { typeReq, data }: { typeReq: string, data: any } = await req.json();
-  /*
-  switch (typeReq){
+  const { requestType, jwt }: { requestType: string, jwt: any } = await req.json();
+
+  // Validate JWT 
+  const {data: { user }} = await supabase.auth.getUser(jwt);
+  if (!user) return new Response(null, {status: 500});
+
+
+  switch (requestType){
     case "login" :
-        return handleLogin(data);
+        return handleLogin(user);
     case "register":
-        return handleRegister(data);
+        return handleRegister(user);
     default:
-        return new Response(null, {
-            status: 200,
+        return new Response("Request Type not specified.", {
+            status: 500,
         });
   }
-    */
- 
+    
+  
+  
+  console.log("user:", user);
 
   const prisma = new PrismaClient();
   
@@ -28,14 +35,16 @@ export async function POST(req) {
   }
   
   main()
-    
+  return new Response(null, {
+    status: 200,
+});  
 }
-async function handleRegister({name,email} : {name:string,email:string}){
+async function handleRegister({id, email} : {id:string; email?:string}){
     const {error} = await supabase
     .from('users')
     .insert([
       {
-        name: name,
+        name: id,
         email: email,
       }
     ]);
@@ -52,7 +61,7 @@ async function handleRegister({name,email} : {name:string,email:string}){
     status: 200,
     });
 }
-async function handleLogin({uid} : {uid:string}) {
+async function handleLogin({id} : {id:string;}) {
     /*
     const {error} = await supabase
     .from('users')

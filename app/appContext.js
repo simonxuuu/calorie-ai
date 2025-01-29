@@ -8,7 +8,7 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState(null);
-  const [userID, setUserID] = useState(null);
+  const [jwt, setJWT] = useState(null);
 
   const updateSession = async () => {
     const {
@@ -17,11 +17,11 @@ const AppProvider = ({ children }) => {
     if (session) {
       setLoggedIn(true);
       setUserEmail(session.user.email);
-      setUserID(session.user.id);
+      setJWT(session.access_token);
     } else {
       setLoggedIn(false);
       setUserEmail(null);
-      setUserID(null);
+      setJWT(null);
     }
   };
 
@@ -33,7 +33,7 @@ const AppProvider = ({ children }) => {
     <AppContext.Provider value={{
        loggedIn,
        userEmail,
-       userID,
+       jwt,
        updateSession }}>{children}</AppContext.Provider>
   );
 };
