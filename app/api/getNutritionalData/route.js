@@ -1,9 +1,19 @@
 const api = process.env.GEMINI_API_KEY;
 import { isBase64 } from 'is-base64';
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import { NextResponse } from "next/server";
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
 
 export async function POST(req) {
+    const supabase = createRouteHandlerClient({ cookies });
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (!user) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     try {
+        
         const { imagePrev, additionalInput } = await req.json();
         
         if (!imagePrev) {
