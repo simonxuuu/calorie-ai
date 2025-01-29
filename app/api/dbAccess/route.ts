@@ -1,85 +1,93 @@
-import { PrismaClient } from '@prisma/client';
-import supabase from '../../supabaseClient'
+import { NextResponse } from 'next/server';
+import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs';
+import supabase from '../../supabaseClient';
 
-export async function POST(req) {
-  const { requestType, jwt }: { requestType: string, jwt: any } = await req.json();
-
-  // Validate JWT 
-  const {data: { user }} = await supabase.auth.getUser(jwt);
-  if (!user) return new Response(null, {status: 500});
-
-
-  switch (requestType){
-    case "login" :
-        return handleLogin(user);
-    case "register":
-        return handleRegister(user);
-    default:
-        return new Response("Request Type not specified.", {
-            status: 500,
-        });
-  }
-    
-  
-  
-  console.log("user:", user);
-
-  const prisma = new PrismaClient();
-  
-  async function main() {
-    //change to reference a table in your schema
-    const val = await prisma.prismatest.findMany({
-      take: 10,
-    });
-    console.log(val);
-  }
-  
-  main()
-  return new Response(null, {
-    status: 200,
-});  
+interface RequestBody {
+  requestType: 'login' | 'register';
+  jwt: string;
 }
-async function handleRegister({id, email} : {id:string; email?:string}){
-    const {error} = await supabase
-    .from('users')
-    .insert([
-      {
-        name: id,
-        email: email,
-      }
-    ]);
 
-    if (error) {
-        console.error(error);
-        return new Response(JSON.stringify({error}), {
-            status: 500,
-        });
+interface UserData {
+  id: string;
+  email?: string;
+}
+
+export async function POST(req: Request) {
+  try {
+    const { requestType, jwt }: RequestBody = await req.json();
+    
+    // Validate input
+    if (!requestType || !jwt) {
+      return NextResponse.json(
+        { error: 'Missing required fields' },
+        { status: 400 }
+      );
     }
+
+    // Validate JWT
+    const { data: { user }, error: authError } = await supabase.auth.getUser(jwt);
     
-    console.log('Inserted user:', email);
-    return new Response(null, {
-    status: 200,
-    });
+    if (authError || !user) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    // Handle requests
+    switch (requestType) {
+      case 'login':
+        return handleLogin({ id: user.id });
+      case 'register':
+        return handleRegister({ id: user.id, email: user.email });
+      default:
+        return NextResponse.json(
+          { error: 'Invalid request type' },
+          { status: 400 }
+        );
+    }
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
+  }
 }
-async function handleLogin({id} : {id:string;}) {
-    /*
-    const {error} = await supabase
+
+async function handleRegister({ id, email }: UserData) {
+  const { error } = await supabase
     .from('users')
-    .select('*')  // Select all columns
-    .eq('id', userId)  // Filter by 'id' column and specific userId
+    .insert([{ name: id, email }]);
+
+  if (error) {
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    );
+  }
+
+  return NextResponse.json(
+    { message: 'User registered successfully' },
+    { status: 200 }
+  );
+}
+
+async function handleLogin({ id }: UserData) {
+  const { data, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('name', id)
     .single();
 
+  if (error) {
+    return NextResponse.json(
+      { error: error.message },
+      { status: 500 }
+    );
+  }
 
-    if (error) {
-        console.error(error);
-        return new Response(JSON.stringify({error}), {
-            status: 500,
-        });
-    }
-    
-    console.log('Inserted user:', email);
-    return new Response(null, {
-    status: 200,
-    });
-    */
+  return NextResponse.json(
+    { user: data },
+    { status: 200 }
+  );
 }
