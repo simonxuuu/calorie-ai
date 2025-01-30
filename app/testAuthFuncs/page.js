@@ -5,35 +5,10 @@ import supabase from "../supabaseClient";
 import { AppContext } from "../appContext";
 
 export default function Home() {
-  const router = useRouter();
-
-  const { userEmail,updateSession,jwt } = useContext(AppContext);
+  const { userEmail, updateSession, jwt } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-    
-    
-  const prismaTest = async () => {
-    try {
-        const response = await fetch('/api/dbAccess', {
-            method: 'POST',
-            body: JSON.stringify({requestType : '', jwt: jwt }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-    
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-    
-        const data = await response.json();
-        console.log('Success:', data);
 
-    } catch (error) {
-        
-        console.error('Error:', error);
-    }
-  } 
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -48,7 +23,6 @@ export default function Home() {
         email,
         password,
       });
-
       if (error) throw error;
       updateSession();
     } catch (error) {
@@ -57,12 +31,13 @@ export default function Home() {
       setLoading(false);
     }
   };
+
+  
   const handleLogout = async () => {
     setLoading(true);
     setError(null);
     try {
-      
-      const {error } = await supabase.auth.signOut();
+      const { error } = await supabase.auth.signOut();
       if (error) throw error;
       updateSession();
     } catch (error) {
@@ -71,21 +46,44 @@ export default function Home() {
       setLoading(false);
     }
   };
+
+
   const handleRegister = async (event) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
-    
+
     try {
       const form = event.target;
       const email = form.elements.email.value;
       const password = form.elements.password.value;
+      
+      //actual register logic
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
       });
+      if (error) throw error; //auth register failed
 
-      if (error) throw error;
+      await fetch("/api/dbAccess", {
+        method: "POST",
+        body: JSON.stringify({ requestType: "register", jwt: data.session.access_token }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }).then((res) => {
+          if (!res.ok) {
+            throw new Error(`Server responded with status ${res.status}`);
+          }
+          return res.json();
+        })
+        .then((res) => {
+          console.log("Success:", res);
+        })
+        .catch((e) => {
+          console.error("Request failed:", e); 
+        });
+
       updateSession();
     } catch (error) {
       setError(error.message);
@@ -125,7 +123,7 @@ export default function Home() {
         </button>
       </form>
       <button onClick={handleLogout}>sign out</button>
-      <button onClick={prismaTest}>test prisma</button>
+     
     </main>
   );
 }

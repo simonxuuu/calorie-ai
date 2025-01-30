@@ -25,6 +25,8 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  
+
   useEffect(() => {
     updateSession(); // Call async fetch auth on load
   }, []);

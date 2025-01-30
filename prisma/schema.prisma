@@ -8,8 +8,14 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
-model prismatest {
-  name  String @id
-  email String
+model User {
+    id String @id @unique
+    email String @unique
+    plan String @default("Free")
+    snaps Snap[] 
+}
+model Snap {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
 }
