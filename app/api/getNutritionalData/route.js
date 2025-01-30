@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { useContext }  from "react";
+
 
 export async function POST(req) {
     const supabase = createRouteHandlerClient({ cookies });
