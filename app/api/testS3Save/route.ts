@@ -4,12 +4,13 @@ import {
   GetObjectCommand,
 } from "@aws-sdk/client-s3";
 
-const s3 = new S3Client({
-  region: process.env.AWS_REGION as string,
-  credentials: {
-    accessKeyId: process.env.AWS_ACCESS as string,
-    secretAccessKey: process.env.AWS_SECRET as string,
-  },
+const r2 = new S3Client({
+    region: "auto",
+    endpoint: `https://eef3717d41c8c6e06e8475573f9ed473.r2.cloudflarestorage.com/`,
+    credentials: {
+      accessKeyId: process.env.R2_ACCESS as string,
+      secretAccessKey: process.env.R2_SECRET as string,
+    },
 });
 
 /**
@@ -30,36 +31,35 @@ function base64ToArrayBuffer(base64) {
   return arrayBuffer;
 }
 
-async function S3Upload(file: ArrayBuffer, fileName: string, fileType: string) {
+async function R2Upload(userId : string, file: ArrayBuffer, fileName: string, fileType: string) {
   const params = {
-    Bucket: process.env.AWS_BUCKET as string,
-    Key: `testUser/${fileName}-${Date.now()}`, //timestamp
+    Bucket: process.env.R2_BUCKET as string,
+    Key: `${userId}/${fileName}-${Date.now()}`, //timestamp
     Body: Buffer.from(file),
     ContentType: fileType,
   };
-
   const command = new PutObjectCommand(params);
-  await s3.send(command);
+  await r2.send(command);
   return fileName;
 }
 
-async function S3Download(fileKey: string) {
-  const params = {
-    Bucket: process.env.AWS_BUCKET as string,
-    Key: `testUser/${fileKey}`,
-  };
-  const streamToBuffer = async (stream) => {
-    const chunks = [];
-    for await (const chunk of stream) {
-      chunks.push(chunk);
-    }
-    return Buffer.concat(chunks);
-  };
-  const command = new GetObjectCommand(params);
-  const res = await s3.send(command);
-  const imageBuffer = await streamToBuffer(res.Body);
-  const fs = require("fs");
-  fs.writeFileSync("retrieved-image.jpg", imageBuffer);
+async function R2Download(userId : string,fileKey: string) {
+    const params = {
+        Bucket: process.env.R2_BUCKET as string,
+        Key: `${userId}/${fileKey}`,
+    };
+    const streamToBuffer = async (stream) => {
+        const chunks = [];
+        for await (const chunk of stream) {
+        chunks.push(chunk);
+        }
+        return Buffer.concat(chunks);
+    };
+    const command = new GetObjectCommand(params);
+    const res = await r2.send(command);
+    const imageBuffer = await streamToBuffer(res.Body);
+    const fs = require("fs");
+    fs.writeFileSync("retrieved-image.jpg", imageBuffer);
 }
 
 export async function POST(req) {
@@ -75,14 +75,14 @@ export async function POST(req) {
       .trim()
       .toString();
     const stringBase64 = imagePrev.split(";base64,")[1].toString();
-    /*
-    const file = await S3Upload(
+    
+    const file = await R2Upload("test User",
       base64ToArrayBuffer(stringBase64),
       "test",
       imageType
     );
-    */
-    const file = await S3Download("test-1737951409144");
+    
+    //const file = await S3Download("test-1737951409144");
     try {
       return new Response(JSON.stringify({ result: file }), { status: 200 });
     } catch (error) {

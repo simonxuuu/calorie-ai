@@ -2,14 +2,27 @@ import { NextResponse } from "next/server";
 import supabase from "@/app/supabaseClient";
 import { prisma } from "@/app/utils/prisma";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import {
+    S3Client,
+    PutObjectCommand,
+    GetObjectCommand,
+} from "@aws-sdk/client-s3";
+
+const r2 = new S3Client({
+    region: "auto",
+    endpoint: `https://eef3717d41c8c6e06e8475573f9ed473.r2.cloudflarestorage.com/`,
+    credentials: {
+      accessKeyId: process.env.R2_ACCESS as string,
+      secretAccessKey: process.env.R2_SECRET as string,
+    },
+});
+const LLMapi = process.env.GEMINI_API_KEY;
 
 interface RequestBody {
   jwt: string;
   rawData: string;
   additionalInput: string;
 }
-
-const api = process.env.GEMINI_API_KEY;
 
 export async function POST(req: Request) {
   const { jwt, rawData, additionalInput }: RequestBody = await req.json();
@@ -37,7 +50,7 @@ export async function POST(req: Request) {
       .trim()
       .toString();
     const stringBase64 = rawData.split(";base64,")[1].toString();
-    const genAI = new GoogleGenerativeAI(api);
+    const genAI = new GoogleGenerativeAI(LLMapi);
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-002" });
     model.generationConfig = {
         temperature: 0,
@@ -71,7 +84,10 @@ export async function POST(req: Request) {
         throw new Error("This is not edible");
       }
 
-      
+      const r2AccessKey = await R2Upload(user.id,
+        base64ToArrayBuffer(stringBase64),
+        imageType
+      );
 
       try {
         await prisma.user.update({
@@ -88,7 +104,8 @@ export async function POST(req: Request) {
                 fat : res.fat,
                 feedback : res.feedback,
                 protein : res.protein,
-                healthScore : res.health_score
+                healthScore : res.health_score,
+                imageKey : r2AccessKey
               },
            }
           },
@@ -111,3 +128,55 @@ export async function POST(req: Request) {
 
   }
 }
+
+
+/**
+ Turns base64 string (w/o prefix) to array buffer.
+*/
+function base64ToArrayBuffer(base64) {
+    const binaryString = atob(base64);
+  
+    // Create a new ArrayBuffer and copy the binary string into it
+    const arrayBuffer = new ArrayBuffer(binaryString.length);
+    const view = new Uint8Array(arrayBuffer);
+  
+    // Convert binary string to an array of bytes
+    for (let i = 0; i < binaryString.length; i++) {
+      view[i] = binaryString.charCodeAt(i);
+    }
+  
+    return arrayBuffer;
+}
+
+async function R2Upload(userId : string, file: ArrayBuffer, fileType: string) {
+    const accessKey = `${Date.now()}`;
+    const params = {
+      Bucket: process.env.R2_BUCKET as string,
+      Key: `${userId}/${accessKey}`, //timestamp
+      Body: Buffer.from(file),
+      ContentType: fileType,
+    };
+    const command = new PutObjectCommand(params);
+    await r2.send(command);
+    return accessKey;
+}
+  
+async function R2Download(userId : string,fileKey: string) {
+    const params = {
+        Bucket: process.env.R2_BUCKET as string,
+        Key: `${userId}/${fileKey}`,
+    };
+    const streamToBuffer = async (stream) => {
+        const chunks = [];
+        for await (const chunk of stream) {
+        chunks.push(chunk);
+        }
+        return Buffer.concat(chunks);
+    };
+    const command = new GetObjectCommand(params);
+    const res = await r2.send(command);
+    const imageBuffer = await streamToBuffer(res.Body);
+    const fs = require("fs");
+    fs.writeFileSync("retrieved-image.jpg", imageBuffer);
+}
+

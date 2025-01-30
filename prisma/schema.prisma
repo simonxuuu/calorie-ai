@@ -26,4 +26,5 @@ model Snap {
   feedback String?
   protein  String?
   healthScore String?
+  imageKey String?
 }

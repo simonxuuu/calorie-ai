@@ -31,7 +31,6 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  
 
   useEffect(() => {
     updateUserSession(); // Get session on load
