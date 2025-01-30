@@ -5,7 +5,7 @@ import supabase from "../supabaseClient";
 import { AppContext } from "../appContext";
 
 export default function Home() {
-  const { userEmail, updateSession, jwt } = useContext(AppContext);
+  const { userEmail, updateUserSession, registerUser } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -32,7 +32,7 @@ export default function Home() {
     }
   };
 
-  
+
   const handleLogout = async () => {
     setLoading(true);
     setError(null);
@@ -46,7 +46,6 @@ export default function Home() {
       setLoading(false);
     }
   };
-
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -65,26 +64,7 @@ export default function Home() {
       });
       if (error) throw error; //auth register failed
 
-      await fetch("/api/dbAccess", {
-        method: "POST",
-        body: JSON.stringify({ requestType: "register", jwt: data.session.access_token }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }).then((res) => {
-          if (!res.ok) {
-            throw new Error(`Server responded with status ${res.status}`);
-          }
-          return res.json();
-        })
-        .then((res) => {
-          console.log("Success:", res);
-        })
-        .catch((e) => {
-          console.error("Request failed:", e); 
-        });
-
-      updateSession();
+      await registerUser(email, password);
     } catch (error) {
       setError(error.message);
     } finally {
