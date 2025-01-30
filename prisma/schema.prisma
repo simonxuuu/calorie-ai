@@ -17,6 +17,13 @@ model User {
 model Snap {
   id        Int      @id @default(autoincrement())
   userId    String
-  foodName  String
   user      User     @relation(fields: [userId], references: [id])
+  foodName  String?
+  calories  String?
+  carbs     String?
+  description String?
+  fat      String?
+  feedback String?
+  protein  String?
+  healthScore String?
 }

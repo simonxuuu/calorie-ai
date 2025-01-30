@@ -6,7 +6,6 @@ interface AppContextType {
     loggedIn: boolean;
     userEmail: string | null;
     jwt: string | null;
-    registerUser: ({ email, password }: { email: string; password: string; }) => void;
     updateUserSession: () => void;
 }
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -32,37 +31,7 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  const registerUser = async ({email, password} : {email:string; password:string;}) => {
-    console.log(email);
-    console.log(password);
-    const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-    });
-    if (error) console.error(error);
-
-    await fetch("/api/register", {
-      method: "POST",
-      body: JSON.stringify({
-        jwt: data.session.access_token,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Server responded with status ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((res) => {
-        console.log("Registered Successfully. ")
-      })
-      .catch((e) => {
-        console.error(e);
-      });
-  };
+  
 
   useEffect(() => {
     updateUserSession(); // Get session on load
@@ -74,7 +43,6 @@ const AppProvider = ({ children }) => {
         loggedIn,
         userEmail,
         jwt,
-        registerUser,
         updateUserSession,
       }}
     >

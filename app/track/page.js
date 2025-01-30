@@ -67,23 +67,20 @@ export default function Track() {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-        
-            const data = await response.json();
+            
+            let data = await response.json();
+            data = data.message;
             console.log('Success:', data);
 
-            // Extract JSON string correctly
-            const jsonString = data.result;
-            console.log(jsonString);
-            const parsedData = jsonString;
         
             setNutritionalValues({
-                foodName: parsedData.foodName,
-                calories: Number(parsedData.calories),
-                carbs: Number(parsedData.carbs),
-                fat: Number(parsedData.fat),
-                protein: Number(parsedData.protein),
-                feedback: parsedData.feedback,
-                health_score: parsedData.health_score
+                foodName: data.foodName,
+                calories: Number(data.calories),
+                carbs: Number(data.carbs),
+                fat: Number(data.fat),
+                protein: Number(data.protein),
+                feedback: data.feedback,
+                health_score: data.health_score
             });
             setDataReceived(true);
             setError(""); // Clear error on success

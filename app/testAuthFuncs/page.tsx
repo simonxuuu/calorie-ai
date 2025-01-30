@@ -5,7 +5,7 @@ import supabase from "../supabaseClient";
 import { AppContext } from "../appContext";
 
 export default function Home() {
-  const { userEmail, updateUserSession, registerUser } = useContext(AppContext);
+  const { userEmail, updateUserSession } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -19,12 +19,7 @@ export default function Home() {
       const form = event.target;
       const email = form.elements.email.value;
       const password = form.elements.password.value;
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      if (error) throw error;
-      updateSession();
+      await loginUser({email,password})
     } catch (error) {
       setError(error.message);
     } finally {
@@ -39,15 +34,70 @@ export default function Home() {
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
-      updateSession();
+      updateUserSession();
     } catch (error) {
       setError(error.message);
     } finally {
       setLoading(false);
     }
   };
+  const registerUser = async ({email, password} : {email:string; password:string;}) => {
+    const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+    });
+    if (error) console.error(error);
 
+    await fetch("/api/register", {
+      method: "POST",
+      body: JSON.stringify({
+        jwt: data.session.access_token,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Server responded with status ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((res) => {
+        console.log("Registered Successfully. ")
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
+  const loginUser = async ({email,password} : {email:string;password:string;}) => {
+    const { data, error } = await supabase.auth.signInWithPassword({email,password});
+    if (error) console.error(error);
 
+    await fetch("/api/login", {
+      method: "POST",
+      body: JSON.stringify({
+        jwt: data.session.access_token,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Server responded with status ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((res) => {
+        console.log(res);
+        console.log("Logged in Successfully. ");
+        updateUserSession();
+      })
+      .catch((e) => {
+        console.error(e);
+      });
+  };
   const handleRegister = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -55,13 +105,11 @@ export default function Home() {
 
     try {
       const form = event.target;
-      
       const email = form.elements.email.value;
       const password = form.elements.password.value;
-      if (email && password){
-        console.log(email);
-        await registerUser(email, password);
-      }
+      
+      await registerUser({email, password});
+      
     } catch (error) {
       setError(error.message);
     } finally {

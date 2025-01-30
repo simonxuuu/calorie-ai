@@ -8,11 +8,9 @@ interface RequestBody {
   rawData: string;
   additionalInput: string;
 }
-interface Snap {
-    foodName : string;
-}
 
 const api = process.env.GEMINI_API_KEY;
+
 export async function POST(req: Request) {
   const { jwt, rawData, additionalInput }: RequestBody = await req.json();
 
@@ -40,7 +38,7 @@ export async function POST(req: Request) {
       .toString();
     const stringBase64 = rawData.split(";base64,")[1].toString();
     const genAI = new GoogleGenerativeAI(api);
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash-002" });
     model.generationConfig = {
         temperature: 0,
         maxOutputTokens: 2000
@@ -50,7 +48,7 @@ export async function POST(req: Request) {
         [
           "Generate precise nutritional data for this image. Add food items together. Return only 1 JSON object. Add brief feedback. Do not add g. Take into account additional info if any." +
             additionalInput +
-            'Format: {foodName: "", calories: "0", carbs: "0", fat: "0", protein: "0", health_score: "0 (out of 10)", description: "",feedback: ""} Do not stray from given format. If the image is not edible, return {foodName: "NA"}.',
+            'Format: {foodName: "", calories: "0", carbs: "0", fat: "0", protein: "0", health_score: "10", description: "",feedback: ""} Do not stray from given format. If the image is not edible, return {foodName: "NA"}.',
           {
             inlineData: {
               data: stringBase64,
@@ -73,9 +71,7 @@ export async function POST(req: Request) {
         throw new Error("This is not edible");
       }
 
-      const snapData: Snap = {
-        foodName: res.foodName,
-      };
+      
 
       try {
         await prisma.user.update({
@@ -84,9 +80,16 @@ export async function POST(req: Request) {
           },
           data: {
            snaps:{
-            create: [
-                snapData
-              ],
+            create: {
+                foodName : res.foodName,
+                calories : res.calories,
+                carbs : res.carbs,
+                description : res.description,
+                fat : res.fat,
+                feedback : res.feedback,
+                protein : res.protein,
+                healthScore : res.health_score
+              },
            }
           },
         });
@@ -106,23 +109,5 @@ export async function POST(req: Request) {
     console.error(error);
     return NextResponse.json({ error: error.message }, { status: 500 });
 
-  }
-
-  try {
-    await prisma.user.create({
-      data: {
-        id: user.id,
-        email: user.email,
-        snaps: {
-          create: [], // No logs are created, effectively an empty array for logs
-        },
-      },
-    });
-    return NextResponse.json(
-      { message: "Success - User Registered" },
-      { status: 200 }
-    );
-  } catch {
-    return NextResponse.json({ error: "Register failed" }, { status: 500 });
   }
 }
