@@ -2,17 +2,11 @@ const api = process.env.GEMINI_API_KEY;
 import { isBase64 } from 'is-base64';
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
-import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+
 
 
 export async function POST(req) {
-    const supabase = createRouteHandlerClient({ cookies });
-    const { data: { user } } = await supabase.auth.getUser();
-
-    if (!user) {
-        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
+    
     try {
         
         const { imagePrev, additionalInput } = await req.json();
@@ -28,7 +22,7 @@ export async function POST(req) {
         console.log(additionalInput)
         try {
             const result = await model.generateContent([
-           "Generate precise nutritional data for this image. Add food items together. Return only 1 JSON object. Add brief feedback. Do not add g. Take into account additional info if any." + additionalInput + "Format: {foodName: \"foodname\", calories: \"0\", carbs: \"0\", fat: \"0\", protein: \"0\", health_score: \"0 (out of 10)\", feedback: \"\"} Do not stray from given format. If the image is not edible, return {foodName: \"NA\"}.",
+           "Generate precise nutritional data for this image. Add food items together. Return only 1 JSON object. Add brief feedback. Do not add g. Take into account additional info if any." + additionalInput + "Format: {foodName: \"\", calories: \"0\", carbs: \"0\", fat: \"0\", protein: \"0\", health_score: \"0 (out of 10)\", description: \"\",feedback: \"\"} Do not stray from given format. If the image is not edible, return {foodName: \"NA\"}.",
                 { 
                     inlineData: {
                         data: stringBase64,

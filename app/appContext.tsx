@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, createContext, useState } from "react";
-import supabase from "./supabaseClient";
+import supabase from "@/app/supabaseClient";
 
 interface AppContextType {
     loggedIn: boolean;
     userEmail: string | null;
     jwt: string | null;
-    registerUser: ({ email, password }: { email: string; password: string; }) => Promise<void>;
+    registerUser: ({ email, password }: { email: string; password: string; }) => void;
     updateUserSession: () => void;
 }
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -33,16 +33,17 @@ const AppProvider = ({ children }) => {
   };
 
   const registerUser = async ({email, password} : {email:string; password:string;}) => {
+    console.log(email);
+    console.log(password);
     const { data, error } = await supabase.auth.signUp({
         email,
         password,
     });
-    if (error) throw error;
+    if (error) console.error(error);
 
-    await fetch("/api/dbAccess", {
+    await fetch("/api/register", {
       method: "POST",
       body: JSON.stringify({
-        requestType: "register",
         jwt: data.session.access_token,
       }),
       headers: {

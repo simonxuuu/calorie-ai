@@ -47,6 +47,7 @@ export default function Home() {
     }
   };
 
+
   const handleRegister = async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -54,17 +55,13 @@ export default function Home() {
 
     try {
       const form = event.target;
+      
       const email = form.elements.email.value;
       const password = form.elements.password.value;
-      
-      //actual register logic
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-      if (error) throw error; //auth register failed
-
-      await registerUser(email, password);
+      if (email && password){
+        console.log(email);
+        await registerUser(email, password);
+      }
     } catch (error) {
       setError(error.message);
     } finally {

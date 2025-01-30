@@ -3,7 +3,7 @@ import supabase from "../../supabaseClient";
 import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
-
+console.log('init ');
 interface RequestBody {
   requestType: string;
   jwt: string;

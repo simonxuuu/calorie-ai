@@ -6,6 +6,7 @@ import { AppContext } from '../appContext';
 import { useContext } from 'react';
 
 export default function Track() {
+    
     const context = useContext(AppContext);
     const [file, setFile] = useState(null);
     const [imagePrev, setImagePrev] = useState('/images/food1.jpg');
@@ -55,12 +56,12 @@ export default function Track() {
         setError("Loading..."); // Set error to "Loading..." when form is submitted
         
         try {
-            const response = await fetch('/api/getNutritionalData', {
+            const response = await fetch('/api/uploadSnap', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ imagePrev, additionalInput, jwt: context.jwt })
+                body: JSON.stringify({ rawData: imagePrev, additionalInput, jwt: context.jwt })
             });
         
             if (!response.ok) {

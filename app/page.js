@@ -1,6 +1,6 @@
 'use client'
 import { useRouter } from "next/navigation";
-import "./globals.css";
+import "@/app/globals.css";
 import Image from "next/image";
 export default function Home() {
 
