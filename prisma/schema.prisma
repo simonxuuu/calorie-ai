@@ -23,9 +23,10 @@ model Snap {
   calories  String?
   carbs     String?
   description String?
-  fat      String?
-  feedback String?
-  protein  String?
+  fat         String?
+  feedback    String?
+  protein     String?
   healthScore String?
-  imageKey String?
-}
+  imageKey    String?
+  createdAt   DateTime @default(now())
+} 

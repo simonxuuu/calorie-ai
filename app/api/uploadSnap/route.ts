@@ -105,7 +105,8 @@ export async function POST(req: Request) {
                 feedback : res.feedback,
                 protein : res.protein,
                 healthScore : res.health_score,
-                imageKey : r2AccessKey
+                imageKey : r2AccessKey,
+                createdAt : new Date()
               },
            }
           },
