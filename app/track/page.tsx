@@ -48,6 +48,20 @@ export default function Track() {
             setError("Image compression failed: " + error.message);
         }
     };
+    
+      const handleDragLeave = (e) => {
+        e.preventDefault();
+      };
+    
+      const handleDragOver = (e) => {
+        e.preventDefault();
+      };
+    
+      const handleDrop = (e) => {
+        e.preventDefault();
+        console.log(e.dataTransfer);
+       handleFileChange(e);
+      };
     const retreiveSnaps = async() => {
         if(!dateRef.current) return;
 
@@ -69,7 +83,11 @@ export default function Track() {
             })
             .then((res) => {
                 if(res[0].image) setRetreivedImage('data:image/jpeg;base64,' + res[0].image)
-                console.log(res);
+                for (let snap of res) {
+            console.log(snap);
+            let utcTime = new Date(snap.createdAt);
+            console.log(utcTime.toLocaleDateString(),utcTime.toLocaleTimeString())
+        }
             })
             .catch((e) => {
               console.error(e);
@@ -135,12 +153,17 @@ export default function Track() {
                         <label htmlFor="file" style={{marginBottom: '1rem', marginTop: '1em'}}>Upload a clear image of your food and add additional information if needed</label>
                         <input type="text" id="additionalInput" value={additionalInput} onChange={e => setAdditionalInput(e.target.value)} placeholder="Enter additional information" name="additionalInput"/>
                         <div
+                                onDrop={(e) => handleDrop(e)}
+                                onDragOver={(e) => handleDragOver(e)}
+                               
+                                onDragLeave={(e) => handleDragLeave(e)}
                                 className="file-upload"
                                 onClick={() => fileInputRef.current.click()}
                                 style={{ cursor: 'pointer' }}
                             >
                                 <p>Click to upload or drag and drop</p>
                                 <input
+                                
                                     type="file"
                                     ref={fileInputRef}
                                     onChange={handleFileChange}
