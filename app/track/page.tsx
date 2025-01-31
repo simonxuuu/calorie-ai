@@ -7,7 +7,7 @@ import { useContext } from 'react'; import { AppContext } from '@/app/appContext
 export default function Track() {
     const {jwt} = useContext(AppContext);
     const [file, setFile] = useState(null);
-    const [imagePrev, setImagePrev] = useState('/images/food1.jpg');
+    const [imagePrev, setImagePrev] = useState('data:,');
     const [dataReceived, setDataReceived] = useState(false);
     const [additionalInput, setAdditionalInput] = useState("");
     const [error, setError] = useState("");
@@ -21,7 +21,8 @@ export default function Track() {
         health_score: 0,
         feedback: ""
     });
-    
+    const dateRef = useRef(null);
+    const [retreivedImage, setRetreivedImage] = useState("data:,");
     const handleFileChange = async (e) => {
         const originalFile = e.target.files[0];
         if (!originalFile) return;
@@ -47,7 +48,33 @@ export default function Track() {
             setError("Image compression failed: " + error.message);
         }
     };
-    
+    const retreiveSnaps = async() => {
+        if(!dateRef.current) return;
+
+        await fetch("/api/retreiveSnap", {
+            method: "POST",
+            body: JSON.stringify({
+              date:dateRef.current.valueAsDate,
+              jwt: jwt,
+            }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((res) => {
+              if (!res.ok) {
+                throw new Error(`Server responded with status ${res.status}`);
+              }
+              return res.json();
+            })
+            .then((res) => {
+                if(res[0].image) setRetreivedImage('data:image/jpeg;base64,' + res[0].image)
+                console.log(res);
+            })
+            .catch((e) => {
+              console.error(e);
+            });
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -94,6 +121,14 @@ export default function Track() {
                 <div className="trackingPage">
                     
                     <div className="trackingSide">
+                        <input type="date" ref={dateRef}/>
+                    <button onClick={retreiveSnaps}>test retreive snaps</button>
+                    <Image
+                    width={250}
+                    height={250}
+                    alt={'file'}
+                    src={retreivedImage}
+                    />
                     <h1 className='header'>Track your Calories</h1>
                     <span className='error'>{error}</span>
                     <form className="trackingSideFORM" onSubmit={handleSubmit}>

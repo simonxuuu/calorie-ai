@@ -5,7 +5,6 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import {
     S3Client,
     PutObjectCommand,
-    GetObjectCommand,
 } from "@aws-sdk/client-s3";
 
 const r2 = new S3Client({
@@ -113,7 +112,7 @@ export async function POST(req: Request) {
                 protein : res.protein,
                 healthScore : res.health_score,
                 imageKey : r2AccessKey,
-                createdAt : new Date()
+                createdAt : new Date().toISOString() //UTC
               },
            }
           },
@@ -169,22 +168,5 @@ async function R2Upload(userId : string, file: ArrayBuffer, fileType: string) {
     return accessKey;
 }
   
-async function R2Download(userId : string,fileKey: string) {
-    const params = {
-        Bucket: process.env.R2_BUCKET as string,
-        Key: `${userId}/${fileKey}`,
-    };
-    const streamToBuffer = async (stream) => {
-        const chunks = [];
-        for await (const chunk of stream) {
-        chunks.push(chunk);
-        }
-        return Buffer.concat(chunks);
-    };
-    const command = new GetObjectCommand(params);
-    const res = await r2.send(command);
-    const imageBuffer = await streamToBuffer(res.Body);
-    const fs = require("fs");
-    fs.writeFileSync("retrieved-image.jpg", imageBuffer);
-}
+
 
