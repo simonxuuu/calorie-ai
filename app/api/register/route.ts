@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import supabase from "@/app/supabaseClient";
 import { prisma } from "@/app/utils/prisma";
+import createDefaultUser from "@/app/utils/supabase/createDefaultUser"
 
 interface RequestBody {
   jwt: string;
@@ -27,15 +28,8 @@ export async function POST(req: Request) {
     }
 
     try {
-        await prisma.user.create({
-          data: {
-            id: user.id,
-            email: user.email,
-            snaps: {
-              create: [], // No logs are created, effectively an empty array for logs
-            },
-          },
-        });
+        await createDefaultUser(user);
+        
         return NextResponse.json(
           { message: "Success - User Registered" },
           { status: 200 }

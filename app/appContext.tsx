@@ -23,12 +23,38 @@ const AppProvider = ({ children }) => {
       setLoggedIn(true);
       setUserEmail(session.user.email);
       setJWT(session.access_token);
+      
+      await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify({
+          jwt: session.access_token,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error(`Server responded with status ${res.status}`);
+          }
+          return res.json();
+        })
+        .then((res) => {
+          console.log(res);
+          console.log("Logged in Successfully. ");
+        })
+        .catch((e) => {
+          console.error(e);
+        });
+
+
 
     } else {
       setLoggedIn(false);
       setUserEmail(null);
       setJWT(null);
     }
+    
   };
 
 

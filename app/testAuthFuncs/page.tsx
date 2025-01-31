@@ -26,8 +26,20 @@ export default function Home() {
       setLoading(false);
     }
   };
+  const handleGoogleLogin = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+           redirectTo : "http://localhost:3000/testAuthFuncs"
+          },
+      });
+      if (error) console.error(error);
 
-
+    }catch{}
+  };
   const handleLogout = async () => {
     setLoading(true);
     setError(null);
@@ -64,39 +76,18 @@ export default function Home() {
         return res.json();
       })
       .then((res) => {
-        console.log("Registered Successfully. ")
+        console.log("Registered Successfully. ");
+        updateUserSession();
       })
       .catch((e) => {
         console.error(e);
       });
   };
   const loginUser = async ({email,password} : {email:string;password:string;}) => {
-    const { data, error } = await supabase.auth.signInWithPassword({email,password});
+    const {error } = await supabase.auth.signInWithPassword({email,password});
     if (error) console.error(error);
 
-    await fetch("/api/login", {
-      method: "POST",
-      body: JSON.stringify({
-        jwt: data.session.access_token,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Server responded with status ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((res) => {
-        console.log(res);
-        console.log("Logged in Successfully. ");
-        updateUserSession();
-      })
-      .catch((e) => {
-        console.error(e);
-      });
+    updateUserSession();
   };
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -148,7 +139,7 @@ export default function Home() {
         </button>
       </form>
       <button onClick={handleLogout}>sign out</button>
-     
+    <button onClick={handleGoogleLogin}>sign in google</button>
     </main>
   );
 }

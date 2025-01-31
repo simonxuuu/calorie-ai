@@ -7,7 +7,6 @@ import { useContext } from 'react';
 
 export default function Track() {
     
-    const context = useContext(AppContext);
     const [file, setFile] = useState(null);
     const [imagePrev, setImagePrev] = useState('/images/food1.jpg');
     const [dataReceived, setDataReceived] = useState(false);
