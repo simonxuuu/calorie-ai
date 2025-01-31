@@ -2,10 +2,10 @@
 import { useRef, useState } from 'react';
 import Image from "next/image";
 import imageCompression from 'browser-image-compression';
-import { useContext } from 'react'; import { AppContext } from '@/app/appContext';
+import { useAppContext } from '@/app/appContext';
 
 export default function Track() {
-    const {jwt} = useContext(AppContext);
+    const {jwt} = useAppContext();
     const [file, setFile] = useState(null);
     const [imagePrev, setImagePrev] = useState('data:,');
     const [dataReceived, setDataReceived] = useState(false);

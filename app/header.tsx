@@ -2,11 +2,10 @@
 import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import { AppContext } from './appContext';
-import { useContext } from 'react';
+import { useAppContext } from './appContext';
 
 export default function Header() {
-    const appContext = useContext(AppContext);
+    const appContext = useAppContext();
     const router = useRouter();
     const pathname = usePathname();
     return (

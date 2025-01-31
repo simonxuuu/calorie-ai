@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, createContext, useState } from "react";
+import React, { useEffect, createContext, useState, useContext } from "react";
 import supabase from "@/app/supabaseClient";
 
 interface AppContextType {
@@ -75,5 +75,5 @@ const AppProvider = ({ children }) => {
     </AppContext.Provider>
   );
 };
-
-export  { AppContext, AppProvider };
+const useAppContext = () => useContext(AppContext); //hook
+export  { useAppContext, AppProvider };

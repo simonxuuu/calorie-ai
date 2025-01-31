@@ -2,10 +2,10 @@
 import { useRouter } from "next/navigation";
 import { useState, useEffect, useContext } from "react";
 import supabase from "../supabaseClient";
-import { AppContext } from "../appContext";
+import { useAppContext } from "../appContext";
 
 export default function Home() {
-  const { userEmail, jwt, updateUserSession } = useContext(AppContext);
+  const { userEmail, jwt, updateUserSession } = useAppContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
