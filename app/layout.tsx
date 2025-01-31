@@ -1,4 +1,4 @@
-import "@/public/globals";
+import "@/app/globals.css";
 import Header from "./header";
 import Footer from "./footer";
 import { AppProvider } from "@/app/appContext";
