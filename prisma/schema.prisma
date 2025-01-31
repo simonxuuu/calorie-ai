@@ -15,16 +15,17 @@ model User {
     snaps Snap[] 
 }
 model Snap {
-  id        Int      @id @default(autoincrement())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  foodName  String?
-  calories  String?
-  carbs     String?
+  id          Int      @id @default(autoincrement())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  foodName    String?
+  calories    String?
+  carbs       String?
   description String?
-  fat      String?
-  feedback String?
-  protein  String?
+  fat         String?
+  feedback    String?
+  protein     String?
   healthScore String?
-  imageKey String?
-}
+  imageKey    String?
+  createdAt   DateTime @default(now())
+} 
