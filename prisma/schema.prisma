@@ -28,5 +28,4 @@ model Snap {
   protein     String?
   healthScore String?
   imageKey    String?
-  createdAt   DateTime @default(now())
 } 
