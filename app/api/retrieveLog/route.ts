@@ -1,11 +1,24 @@
 import { PrismaClient } from "@prisma/client";
+import supabase from "@/app/supabaseClient";
 
 const prisma = new PrismaClient();
 
 const tempId: string = "7c3e750f-f1b9-46ac-a8b5-66bb58c48280"
 
-async function getFoodEntriesForDate(userId: string, date: string) {
+
+async function getFoodEntriesForDate(jwt: string, date: string) {
     // Convert the date string
+
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser(jwt);
+    if (authError || !user) {
+      return Response.json({ error: "Unauthorized Access" }, { status: 401 });
+    }
+
+    const userId = user.id;
+    
     const startDate = new Date(date);
     const endDate = new Date(date);
     endDate.setDate(endDate.getDate() + 1); // next day to filter by range
@@ -20,15 +33,17 @@ async function getFoodEntriesForDate(userId: string, date: string) {
       },
       orderBy: { createdAt: "asc" }, // sort by time
     });
-  
+    console.log(foodEntries)
     return foodEntries;
   }
+
 
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url)
     console.log(searchParams)
     const date = searchParams.get('date')
+    const jwt = searchParams.get('jwt')
 
     getFoodEntriesForDate(tempId, date)
     

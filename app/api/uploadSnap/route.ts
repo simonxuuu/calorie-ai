@@ -29,6 +29,9 @@ export async function POST(req: Request) {
 
   // Validate input
   if (!jwt || !rawData) {
+    console.log("User needs to login, auth error");
+    if (jwt) console.log("JWT exists:");
+    if (rawData) console.log("Raw data exists:");
     return NextResponse.json(
       { error: "Missing required fields" },
       { status: 400 }
@@ -38,10 +41,14 @@ export async function POST(req: Request) {
   const {
     data: { user },
     error: authError,
+
   } = await supabase.auth.getUser(jwt);
+
+  
   if (authError || !user) {
     return NextResponse.json({ error: "Unauthorized Access" }, { status: 401 });
   }
+
 
   try {
     const imageType = rawData

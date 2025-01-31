@@ -5,7 +5,7 @@ import supabase from "../supabaseClient";
 import { AppContext } from "../appContext";
 
 export default function Home() {
-  const { userEmail, updateUserSession } = useContext(AppContext);
+  const { userEmail, jwt, updateUserSession } = useContext(AppContext);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -110,6 +110,8 @@ export default function Home() {
   return (
     <main className="loginPage">
       <h1 className="subHeading">cur User: {userEmail ?? "not logged in"}</h1>
+      <h1 className="subHeading">jwt: {jwt ? "no exist" : "exist"}</h1>
+      
       <h1 className="subHeading">Create an account!</h1>
       {error && <p className="errorText">{error}</p>}
       <form onSubmit={handleRegister} className="loginForm">
