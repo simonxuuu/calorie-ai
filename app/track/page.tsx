@@ -2,11 +2,10 @@
 import { useRef, useState } from 'react';
 import Image from "next/image";
 import imageCompression from 'browser-image-compression';
-import { AppContext } from '../appContext';
-import { useContext } from 'react';
+import { useContext } from 'react'; import { AppContext } from '@/app/appContext';
 
 export default function Track() {
-    
+    const {jwt} = useContext(AppContext);
     const [file, setFile] = useState(null);
     const [imagePrev, setImagePrev] = useState('/images/food1.jpg');
     const [dataReceived, setDataReceived] = useState(false);
@@ -39,7 +38,7 @@ export default function Track() {
     
             const reader = new FileReader();
             reader.onloadend = () => {
-                setImagePrev(reader.result);
+                setImagePrev(String(reader.result));
             };
             reader.readAsDataURL(compressedFile);
             setFile(compressedFile);
@@ -60,7 +59,7 @@ export default function Track() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ rawData: imagePrev, additionalInput, jwt: context.jwt })
+                body: JSON.stringify({ rawData: imagePrev, additionalInput, jwt: jwt })
             });
         
             if (!response.ok) {

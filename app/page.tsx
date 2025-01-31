@@ -6,9 +6,6 @@ export default function Home() {
 
 const router = useRouter();
 
-
-
-
   return (
     <main>
       <section id='landing0' style={{ marginTop: "10em" }}>
