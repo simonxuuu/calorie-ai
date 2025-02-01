@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextResponse } from "next/server";
-import supabase from "@/app/supabaseClient";
+import validateJWT from "@/app/utils/supabase/validateJWT";
 import {
     S3Client,
     GetObjectCommand,
@@ -30,23 +30,16 @@ export async function POST(req: Request) {
           { status: 400 }
         )
     }
-     // Validate JWT
-    const {
-        data: { user },
-        error: authError,
-
-    } = await supabase.auth.getUser(jwt);
-
+    const validJWT = await validateJWT(jwt);
+    const user = validJWT.user;
+    if (!user) return NextResponse.json({error:validJWT.response}, {status:validJWT.status});
     
-    if (authError || !user) {
-        return NextResponse.json({ error: "Unauthorized Access" }, { status: 401 });
-    }
 
     let logs = await getFoodEntriesForDate(user.id, date)
     for (let log of logs) {
         if (!log['imageKey']) continue;
         log['image'] = await R2Download(user.id,log['imageKey']);
-        delete log['imageKey']
+        log['imageKey'] = null;
     }    
     return NextResponse.json(logs, {status: 200})
 
@@ -87,13 +80,16 @@ async function R2Download(userId : string,fileKey: string) {
         Bucket: process.env.R2_BUCKET as string,
         Key: `${userId}/${fileKey}`,
     };
-    const streamToBuffer = async (stream) => {
-        const chunks = [];
-        for await (const chunk of stream) {
-        chunks.push(chunk);
-        }
-        return Buffer.concat(chunks);
-    };
+    
+    const streamToBuffer = (stream) : Promise<Buffer> => {
+        return new Promise((resolve, reject) => {
+          const chunks : Buffer[] = [];
+          stream.on('data', chunk => chunks.push(chunk));
+          stream.on('end', () => resolve(Buffer.concat(chunks)));
+          stream.on('error', reject);
+        });
+     };
+      
     const command = new GetObjectCommand(params);
     const res = await r2.send(command);
     const imageBuffer = await streamToBuffer(res.Body);

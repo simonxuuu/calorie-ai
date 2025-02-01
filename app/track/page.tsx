@@ -5,13 +5,13 @@ import imageCompression from 'browser-image-compression';
 import { useAppContext } from '@/app/appContext';
 
 export default function Track() {
-    const {jwt} = useAppContext();
-    const [file, setFile] = useState(null);
-    const [imagePrev, setImagePrev] = useState('data:,');
+    const {jwt} = useAppContext()!;
+    const [file, setFile] = useState<File | undefined>(undefined);
+    const [imagePrev, setImagePrev] = useState<string | undefined>(undefined);
     const [dataReceived, setDataReceived] = useState(false);
     const [additionalInput, setAdditionalInput] = useState("");
     const [error, setError] = useState("");
-    const fileInputRef = useRef(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
     const [nutritionalValues, setNutritionalValues] = useState({
         foodName: "",
         calories: 0,
@@ -21,7 +21,7 @@ export default function Track() {
         health_score: 0,
         feedback: ""
     });
-    const dateRef = useRef(null);
+    const dateRef =  useRef<HTMLInputElement>(null);
     const [retreivedImage, setRetreivedImage] = useState("data:,");
     const handleFileChange = async (e) => {
         const originalFile = e.target.files[0];
@@ -145,7 +145,7 @@ export default function Track() {
                     width={250}
                     height={250}
                     alt={'file'}
-                    src={retreivedImage}
+                    src={retreivedImage ?? 'data:,'}
                     />
                     <h1 className='header'>Track your Calories</h1>
                     <span className='error'>{error}</span>
@@ -158,7 +158,7 @@ export default function Track() {
                                
                                 onDragLeave={(e) => handleDragLeave(e)}
                                 className="file-upload"
-                                onClick={() => fileInputRef.current.click()}
+                                onClick={() => fileInputRef?.current?.click()}
                                 style={{ cursor: 'pointer' }}
                             >
                                 <p>Click to upload or drag and drop</p>
@@ -187,7 +187,7 @@ export default function Track() {
                         width={250}
                         height={250}
                         alt={'file'}
-                        src={imagePrev}
+                        src={imagePrev ?? 'data:,'}
                     />
                  
                     </div>

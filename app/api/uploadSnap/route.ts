@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import supabase from "@/app/supabaseClient";
 import { prisma } from "@/app/utils/prisma";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+import validateJWT from "@/app/utils/supabase/validateJWT";
 import {
     S3Client,
     PutObjectCommand,
@@ -15,7 +16,7 @@ const r2 = new S3Client({
       secretAccessKey: process.env.R2_SECRET as string,
     },
 });
-const LLMapi = process.env.GEMINI_API_KEY;
+const LLMapi = process.env.GEMINI_API_KEY!;
 
 interface RequestBody {
   jwt: string;
@@ -25,30 +26,10 @@ interface RequestBody {
 
 export async function POST(req: Request) {
   const { jwt, rawData, additionalInput }: RequestBody = await req.json();
-
-  // Validate input
-  if (!jwt || !rawData) {
-    console.log("User needs to login, auth error");
-    if (jwt) console.log("JWT exists:");
-    if (rawData) console.log("Raw data exists:");
-    return NextResponse.json(
-      { error: "Missing required fields" },
-      { status: 400 }
-    );
-  }
-  // Validate JWT
-  const {
-    data: { user },
-    error: authError,
-
-  } = await supabase.auth.getUser(jwt);
-
+  const validJWT = await validateJWT(jwt);
+  const user = validJWT.user;
+  if (!user) return NextResponse.json({error:validJWT.response}, {status:validJWT.status});
   
-  if (authError || !user) {
-    return NextResponse.json({ error: "Unauthorized Access" }, { status: 401 });
-  }
-
-
   try {
     const imageType = rawData
       .split(";base64,")[0]

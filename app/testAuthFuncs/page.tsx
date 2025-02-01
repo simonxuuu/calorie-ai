@@ -1,11 +1,10 @@
 "use client";
-import { useRouter } from "next/navigation";
-import { useState, useEffect, useContext } from "react";
+import { useState } from "react";
 import supabase from "../supabaseClient";
 import { useAppContext } from "../appContext";
 
 export default function Home() {
-  const { userEmail, jwt, updateUserSession } = useAppContext();
+  const { userEmail, jwt, updateUserSession } = useAppContext()!;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -63,7 +62,7 @@ export default function Home() {
     await fetch("/api/register", {
       method: "POST",
       body: JSON.stringify({
-        jwt: data.session.access_token,
+        jwt: data.session?.access_token,
       }),
       headers: {
         "Content-Type": "application/json",

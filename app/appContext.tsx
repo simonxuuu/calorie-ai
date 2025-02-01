@@ -3,18 +3,18 @@ import React, { useEffect, createContext, useState, useContext } from "react";
 import supabase from "@/app/supabaseClient";
 
 interface AppContextType {
-    loggedIn: boolean;
-    userEmail: string | null;
-    jwt: string | null;
+    loggedIn: boolean | undefined;
+    userEmail: string | undefined;
+    jwt: string | undefined;
     updateUserSession: () => void;
 }
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 const AppProvider = ({ children }) => {
 
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState(null);
-  const [jwt, setJWT] = useState(null);
+  const [loggedIn, setLoggedIn] = useState<AppContextType['loggedIn']> (false);
+  const [userEmail, setUserEmail] = useState<AppContextType['userEmail']> (undefined);
+  const [jwt, setJWT] = useState<AppContextType['jwt']> (undefined);
   
   const updateUserSession = async () => {
     const { data: { session } } = await supabase.auth.getSession();
@@ -51,8 +51,8 @@ const AppProvider = ({ children }) => {
 
     } else {
       setLoggedIn(false);
-      setUserEmail(null);
-      setJWT(null);
+      setUserEmail(undefined);
+      setJWT(undefined);
     }
     
   };

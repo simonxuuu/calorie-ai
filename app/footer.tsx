@@ -1,11 +1,6 @@
 'use client'
-import { useRouter } from 'next/navigation';
-
 
 export default function Footer() {
-
-    const router = useRouter();
-    //https://teentechsf.org/
     return (
       <footer>
         <span>This website uses predictive algorithms - it is not 100% accurate.</span>

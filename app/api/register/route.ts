@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
-import supabase from "@/app/supabaseClient";
-import { prisma } from "@/app/utils/prisma";
-import createDefaultUser from "@/app/utils/supabase/createDefaultUser"
+import validateJWT from "@/app/utils/supabase/validateJWT";
+import createDefaultUser from "@/app/utils/supabase/createDefaultUserDB"
 
 interface RequestBody {
   jwt: string;
@@ -10,26 +9,12 @@ interface RequestBody {
 export async function POST(req: Request) {
   
     const { jwt }: RequestBody = await req.json();
-
-    // Validate input
-    if (!jwt) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
-    }
-    // Validate JWT
-    const {
-      data: { user },
-      error: authError,
-    } = await supabase.auth.getUser(jwt);
-    if (authError || !user) {
-        return NextResponse.json({ error: "Unauthorized Access" }, { status: 401 });
-    }
+    const validJWT = await validateJWT(jwt);
+    const user = validJWT.user;
+    if (!user) return NextResponse.json({error:validJWT.response}, {status:validJWT.status});
 
     try {
         await createDefaultUser(user);
-        
         return NextResponse.json(
           { message: "Success - User Registered" },
           { status: 200 }
