@@ -93,7 +93,7 @@ export async function POST(req: Request) {
                 protein : res.protein,
                 healthScore : res.health_score,
                 imageKey : r2AccessKey,
-                createdAt : new Date().toISOString() //UTC
+                createdAt: new Date().toISOString()
               },
            }
           },

@@ -19,7 +19,7 @@ model Snap {
   id        Int      @id @default(autoincrement())
   userId    String
   user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
+  createdAt DateTime 
   foodName  String?
   calories  String?
   carbs     String?

@@ -64,11 +64,19 @@ export default function Track() {
       };
     const retreiveSnaps = async() => {
         if(!dateRef.current) return;
+        if(!dateRef.current.value) return;
+        
+        let startDate = new Date(
+            parseInt(dateRef.current.value.split('-')[0]),
+            parseInt(dateRef.current.value.split('-')[1]) - 1,
+            parseInt(dateRef.current.value.split('-')[2]), 0, 0, 0, 0);
+        let endDate = new Date(startDate); endDate.setHours(23,59,59,999);
 
         await fetch("/api/retreiveSnap", {
             method: "POST",
             body: JSON.stringify({
-              date:dateRef.current.valueAsDate,
+              start: startDate.toISOString(),
+              end: endDate.toISOString(),
               jwt: jwt,
             }),
             headers: {

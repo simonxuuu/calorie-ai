@@ -17,25 +17,20 @@ const prisma = new PrismaClient();
 
 interface RequestBody {
     jwt: string;
-    date: string;
+    start: string;
+    end: string;
 }
 
 export async function POST(req: Request) {
   try {
-    const { date, jwt } : RequestBody = await req.json();
+    const { start, end, jwt } : RequestBody = await req.json();
     
-    if (!date) {
-        return NextResponse.json(
-          { error: 'Date parameter is required' },
-          { status: 400 }
-        )
-    }
     const validJWT = await validateJWT(jwt);
     const user = validJWT.user;
     if (!user) return NextResponse.json({error:validJWT.response}, {status:validJWT.status});
     
 
-    let logs = await getFoodEntriesForDate(user.id, date)
+    let logs = await getFoodEntriesForDate(user.id, start,end)
     for (let log of logs) {
         if (!log['imageKey']) continue;
         log['image'] = await R2Download(user.id,log['imageKey']);
@@ -50,14 +45,8 @@ export async function POST(req: Request) {
     )
   }
 }
-async function getFoodEntriesForDate(userId: string, date: string) {
+async function getFoodEntriesForDate(userId: string, gte: string, lt:string) {
 
-    const startDate = new Date(date);
-    startDate.setDate(startDate.getDate() + 1)
-    startDate.setHours(0, 0, 0, 0);
-    const endDate = new Date(startDate);
-    endDate.setHours(23, 59, 59, 999);
-   
     const foodEntries = await prisma.snap.findMany({
         omit: {
             id: true,
@@ -66,12 +55,13 @@ async function getFoodEntriesForDate(userId: string, date: string) {
       where: {
         userId,
         createdAt: {
-          gte: startDate.toISOString(), // Start 
-          lt: endDate.toISOString(), // Before next day
+          gte, // Start 
+          lt, // Before next day
         },
       },
       orderBy: { createdAt: "asc" }, // sort by time
     });
+    
     return foodEntries;
 }
 
