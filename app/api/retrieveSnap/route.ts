@@ -15,22 +15,24 @@ const r2 = new S3Client({
 });
 const prisma = new PrismaClient();
 
-interface RequestBody {
-    jwt: string;
-    start: string;
-    end: string;
-}
-
-export async function POST(req: Request) {
+export async function GET(req: Request) {
   try {
-    const { start, end, jwt } : RequestBody = await req.json();
+    const url = new URL(req.url).searchParams;
+    const gle = url.get('gle'); //start utc date for fetch snap
+    const lt = url.get('lt'); // end utc date for fetch snap
+    const jwt = url.get('jwt');
+    
+    // Handle missing parameters
+    if (!gle || !lt || !jwt) {
+      return NextResponse.json({error:'Missing required query parameters'}, { status: 400 });
+    }
     
     const validJWT = await validateJWT(jwt);
     const user = validJWT.user;
     if (!user) return NextResponse.json({error:validJWT.response}, {status:validJWT.status});
     
 
-    let logs = await getFoodEntriesForDate(user.id, start,end)
+    let logs = await getFoodEntriesForDate(user.id, gle, lt)
     for (let log of logs) {
         if (!log['imageKey']) continue;
         log['image'] = await R2Download(user.id,log['imageKey']);

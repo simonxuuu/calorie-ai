@@ -3,12 +3,16 @@ import validateJWT from "@/app/utils/supabase/validateJWT";
 import createDefaultUserDB from "@/app/utils/supabase/createDefaultUserDB";
 import findUserDB from "@/app/utils/supabase/findUserDB";
 
-interface RequestBody {
-  jwt: string;
-}
 
-export async function POST(req: Request) {
-  const { jwt }: RequestBody = await req.json();
+
+export async function GET(req: Request) {
+ 
+  const url = new URL(req.url).searchParams;
+    const jwt = url.get('jwt');
+    // Handle missing parameters
+    if (!jwt) {
+        return NextResponse.json({error:'Missing required query parameters'}, { status: 400 });
+    }
 
   const validJWT = await validateJWT(jwt);
   const user = validJWT.user;

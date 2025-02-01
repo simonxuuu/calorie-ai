@@ -23,12 +23,8 @@ const AppProvider = ({ children }) => {
       setLoggedIn(true);
       setUserEmail(session.user.email);
       setJWT(session.access_token);
-      
-      await fetch("/api/login", {
-        method: "POST",
-        body: JSON.stringify({
-          jwt: session.access_token,
-        }),
+      await fetch(`/api/login/?jwt=${encodeURIComponent(session.access_token)}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
