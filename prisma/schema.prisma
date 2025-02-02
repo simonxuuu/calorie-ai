@@ -14,7 +14,7 @@ model User {
     plan        String    @default("Free")
     snaps       Snap[]
     streak      Int?
-    
+    lastLogin   DateTime
     referralId  String?   // ID of user who referred this user
     referredBy  User?     @relation("UserReferrals", fields: [referralId], references: [id])
     referrals   User[]    @relation("UserReferrals")
