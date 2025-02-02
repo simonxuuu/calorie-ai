@@ -61,7 +61,7 @@ async function getFoodEntriesForDate(userId: string, gte: string, lt:string) {
           lt, // Before next day
         },
       },
-      orderBy: { createdAt: "asc" }, // sort by time
+      orderBy: { createdAt: "asc" }, // Sort by time
     });
     
     return foodEntries;
