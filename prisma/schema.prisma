@@ -45,6 +45,7 @@ model Goals {
   id         Int      @id @default(autoincrement())
   userId     String
   user       User     @relation(fields: [userId], references: [id])
+  lose       Boolean
   weight     Float
   calories   Float
   fat        Float
