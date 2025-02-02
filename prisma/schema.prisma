@@ -30,3 +30,40 @@ model Snap {
   healthScore String?
   imageKey    String?
 } 
+
+model Biometrics {
+  id         Int      @id @default(autoincrement())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  weight     Float
+  height     Float
+  activity   Int
+  sex        Boolean
+}
+
+model Goals {
+  id         Int      @id @default(autoincrement())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  weight     Float
+  calories   Float
+  fat        Float
+  prot       Float
+  carb       Float
+} 
+
+model DailyLog {
+  id         Int      @id @default(autoincrement())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  date       DateTime 
+  curCal     Float
+  curProt    Float
+  curFat     Float
+  curCarb    Float
+  targCal    Float
+  targProt   Float
+  targFat    Float
+  targCarb   Float
+  health     Int 
+} 
