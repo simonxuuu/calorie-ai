@@ -9,67 +9,71 @@ datasource db {
 }
 
 model User {
-    id          String    @id @unique
-    email       String    @unique
-    plan        String    @default("Free")
-    snaps       Snap[]
-    streak      Int?
-    lastLogin   DateTime
-    referralId  String?   // ID of user who referred this user
-    referredBy  User?     @relation("UserReferrals", fields: [referralId], references: [id])
-    referrals   User[]    @relation("UserReferrals")
+  id         String       @id @unique
+  email      String       @unique
+  plan       String       @default("Free")
+  snaps      Snap[]
+  streak     Int?
+  lastLogin  DateTime
+  referralId String? // ID of user who referred this user
+  referredBy User?        @relation("UserReferrals", fields: [referralId], references: [id])
+  referrals  User[]       @relation("UserReferrals")
+  Biometrics Biometrics[]
+  Goals      Goals[]
+  DailyLog   DailyLog[]
 }
+
 model Snap {
-  id        Int      @id @default(autoincrement())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
-  createdAt DateTime 
-  foodName  String?
-  calories  String?
-  carbs     String?
+  id          Int      @id @default(autoincrement())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime
+  foodName    String?
+  calories    String?
+  carbs       String?
   description String?
   fat         String?
   feedback    String?
   protein     String?
   healthScore String?
   imageKey    String?
-} 
+}
 
 model Biometrics {
-  id         Int      @id @default(autoincrement())
-  userId     String
-  user       User     @relation(fields: [userId], references: [id])
-  weight     Float?
-  height     Float?
-  activity   Int?
-  age        Int?
-  sex        Boolean
+  id       Int     @id @default(autoincrement())
+  userId   String
+  user     User    @relation(fields: [userId], references: [id])
+  weight   Float?
+  height   Float?
+  activity Int?
+  age      Int?
+  sex      Boolean
 }
 
 model Goals {
-  id         Int      @id @default(autoincrement())
-  userId     String
-  user       User     @relation(fields: [userId], references: [id])
-  lose       Boolean
-  weight     Float
-  calories   Float
-  fat        Float
-  prot       Float
-  carb       Float
-} 
+  id       Int     @id @default(autoincrement())
+  userId   String
+  user     User    @relation(fields: [userId], references: [id])
+  lose     Boolean
+  weight   Float
+  calories Float
+  fat      Float
+  prot     Float
+  carb     Float
+}
 
 model DailyLog {
-  id         Int      @id @default(autoincrement())
-  userId     String
-  user       User     @relation(fields: [userId], references: [id])
-  date       DateTime 
-  curCal     Float
-  curProt    Float
-  curFat     Float
-  curCarb    Float
-  targCal    Float
-  targProt   Float
-  targFat    Float
-  targCarb   Float
-  health     Int 
-} 
+  id       Int      @id @default(autoincrement())
+  userId   String
+  user     User     @relation(fields: [userId], references: [id])
+  date     DateTime
+  curCal   Float
+  curProt  Float
+  curFat   Float
+  curCarb  Float
+  targCal  Float
+  targProt Float
+  targFat  Float
+  targCarb Float
+  health   Int
+}
