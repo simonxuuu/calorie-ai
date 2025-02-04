@@ -33,10 +33,10 @@ main {
     font-weight: 400;
     color: #777;
     font-size: 1rem;
-    position: relative;
-    width: 5rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     text-align: center;
-    left: calc(50%);
 }
   
   .topBar {
