@@ -247,8 +247,21 @@ main {
           margin-left: auto;
           margin-right: auto;
       }
+
+      .bottomBar {
+        width: 50%;
+        border-radius: 2rem;
+        border: 1px solid #cecece;
+        padding: 2rem;
+        margin-bottom: 1rem;
+        background-color: rgb(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px); /* For Safari support */
+        
+      }
   
       .calContainer .big {
           width: 100%; /* Added width: 100% to big card */
       }
   }
+
