@@ -1,6 +1,9 @@
 import React from 'react';
 import './dashboard.css';
-import { House, CameraPlus, PresentationChart } from "@phosphor-icons/react/dist/ssr";
+
+
+import Nav from './components/Nav';
+import Header from './components/Header';
 export default function Dashboard() {
 
     const getDate = () =>  {
@@ -15,13 +18,7 @@ export default function Dashboard() {
 
     return (
         <main> 
-            <div className="topBar">   
-                <h1 className="snappitLogo">Snappit</h1>
-                <div className="topButtons">
-                    <button className="iconNav">Settings</button>
-                    <button className="iconNav">Inbox</button>
-                </div>
-            </div>
+            <Header/>
             
             <div className="navBar">
                 <div className="navInfo">
@@ -122,12 +119,7 @@ export default function Dashboard() {
                 <button className="viewAll">View all</button>
              </div>
 
-             <div className="bottomBar">
-               <House size={'2.25rem'} weight='bold'/>
-               <CameraPlus size={'3.5rem'}  weight='fill' style={{marginBottom:'0.5rem'}}/>
-               <PresentationChart size={'2.25rem'} weight='bold'/>
-    
-             </div>
+             <Nav/>
 
                 
         </main>
