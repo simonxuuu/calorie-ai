@@ -1,0 +1,134 @@
+/* Assuming this is in a file like sponsor.css or similar */
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    padding: 40px 20px; /* Add some padding around the main content, and more top/bottom */
+    background-color: #f8f9fa; /* Consistent light background */
+}
+
+.sponsorBox {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px; /* Wider form, more typical for desktop */
+    padding: 40px; /* Consistent padding */
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+}
+
+.sponsorBox h1 {
+    font-size: 2.5rem; /* Large title */
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 15px; /* Space below the title */
+    line-height: 1.1;
+    color: #333; /* Darker title color */
+}
+
+.sponsorBox h2 {
+    font-size: 1.25rem; /* Subtitle size */
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 30px; /* More space below the subtitle */
+    color: #555; /* Slightly lighter subtitle color */
+}
+
+.formRow {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px; /* Spacing between form rows */
+}
+
+.formRow label {
+    font-size: 1rem;
+    font-weight: 500; /* Bold labels */
+    margin-bottom: 8px; /* Space between label and input */
+    color: #333;
+}
+
+.formRow input[type="text"],
+.formRow input[type="email"],
+.formRow textarea {
+    padding: 12px 15px; /* Consistent padding */
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Rounded inputs, but less than pill-shaped */
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    color: #333;
+    width: 100%; /* Full width inputs */
+}
+
+.formRow textarea {
+    min-height: 150px; /* Larger text area */
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.formRow input[type="text"]:focus,
+.formRow input[type="email"]:focus,
+.formRow textarea:focus {
+    border-color: #888;
+}
+
+.formRow .error {
+     border-color: #dc3545; /* Red border on error */
+}
+
+
+.formRow .errorMessage {
+    color: #dc3545;
+    font-size: 0.875rem; /* Smaller error message text */
+    margin-top: 5px; /* Space above error message */
+}
+
+.sponsorBox button[type="submit"] {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px; /* Pill-shaped button */
+    background-color: #333;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: 500;
+    width: 100%; /* Full width button */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 10px; /* Add some margin on top of the button*/
+}
+
+.sponsorBox button[type="submit"]:hover {
+    background-color: #555;
+}
+
+.sponsorBox button[type="submit"]:disabled {
+    background-color: #ddd;
+    color: #888;
+    cursor: not-allowed;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    main {
+        padding: 20px; /* Reduce padding on smaller screens */
+    }
+
+    .sponsorBox {
+        padding: 20px; /* Reduce internal padding on smaller screens */
+        border-radius: 0; /* Remove border-radius for full-width look */
+        border: none; /* Remove border for full-width look */
+    }
+
+    .sponsorBox h1 {
+        font-size: 2rem; /* Slightly smaller title on mobile */
+    }
+
+    .sponsorBox h2 {
+        font-size: 1rem;  /*Slightly smaller font*/
+    }
+}
