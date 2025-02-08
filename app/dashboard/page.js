@@ -1,6 +1,6 @@
 import React from 'react';
 import './dashboard.css';
-import { House } from "@phosphor-icons/react/dist/ssr";
+import { House, CameraPlus, PresentationChart } from "@phosphor-icons/react/dist/ssr";
 export default function Dashboard() {
 
     const getDate = () =>  {
@@ -78,7 +78,7 @@ export default function Dashboard() {
                         <h2 className="card-data">58g</h2>
                         <p className="card-label">Protein</p>
                         </div>
-                        <div className="progress-circle"/>
+                        <div className="progress-circle" style={{'--fillPercentage':`${69}%`}}/>
                     </div>
                 </div>
             </div>
@@ -123,11 +123,10 @@ export default function Dashboard() {
              </div>
 
              <div className="bottomBar">
-
-               <House/>
-                <button className="iconNav">Search</button>
-                <button className="iconNav">Add</button>
-                <button className="iconNav">Profile</button>
+               <House size={'2.25rem'} weight='bold'/>
+               <CameraPlus size={'3.5rem'}  weight='fill' style={{marginBottom:'0.5rem'}}/>
+               <PresentationChart size={'2.25rem'} weight='bold'/>
+    
              </div>
 
                 
