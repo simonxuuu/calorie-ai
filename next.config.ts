@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
-    reactStrictMode:false,
+    reactStrictMode: false,
     experimental: {
         reactCompiler: true,
     }

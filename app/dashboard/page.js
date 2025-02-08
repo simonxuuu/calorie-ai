@@ -1,6 +1,6 @@
 import React from 'react';
 import './dashboard.css';
-
+import { House } from "@phosphor-icons/react/dist/ssr";
 export default function Dashboard() {
 
     const getDate = () =>  {
@@ -123,7 +123,8 @@ export default function Dashboard() {
              </div>
 
              <div className="bottomBar">
-                <button className="iconNav">Home</button>
+
+               <House/>
                 <button className="iconNav">Search</button>
                 <button className="iconNav">Add</button>
                 <button className="iconNav">Profile</button>

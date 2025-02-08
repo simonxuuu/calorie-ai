@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "postinstall": "npx prisma generate",
     "build": "next build",
     "start": "next start",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.735.0",
     "@google/generative-ai": "^0.21.0",
+    "@phosphor-icons/react": "^2.1.7",
     "@prisma/client": "^6.3.0",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/ssr": "^0.5.2",
