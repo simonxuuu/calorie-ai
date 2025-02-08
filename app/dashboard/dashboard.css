@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 main {
-    background-color: #f8f8f8;
+    background-color: var(--dashboardBackground);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,6 +13,7 @@ main {
 .snappitLogo {
     font-weight: 800;
     font-size: 1.75rem;
+    color: var(--dashboardMainTxtColor);
 }
 
 
@@ -28,20 +29,24 @@ main {
 
 .snapTitle {
     font-weight: 500;
-
+    color: var(--dashboardMainTxtColor);
 }
 
 .navTitle {
-    font-weight: 600;
-    font-size: 1rem;
+    font-weight: 500;
+    margin:0;
+    font-size: 0.85rem;
+    color: var(--dashboardMainTxtColor);
 }
 .navsubTitle {
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 0.85rem;
+    margin:0;
+    color: var(--dashboardMainTxtColor);
 }
 .viewAll {
     font-weight: 400;
-    color: #777;
+    color: var(--dashboardSubTxtColor);
     font-size: 1rem;
     position: absolute;
     left: 50%;
@@ -57,16 +62,17 @@ main {
     width: 100vw;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: #f3f3f3;
+    background-color: var(--dashboardHeader);
 }
 
 .navBar {
-    display: flex;
+    display: flex; flex-direction: column;
     width: 100%;
-    padding: 0; padding-left: 1rem; padding-right: 1rem;
+    margin-top:0.5rem;
+    padding: 0; padding-left: 1.25rem; padding-right: 1.25rem;
     box-sizing: border-box;
-    gap: 1rem;
-    background-color: #f8f8f8;
+   
+  
 }
 
 .topButtons {
@@ -75,8 +81,8 @@ main {
 }
 
 .card {
-    background-color: white;
-    border: 0.09rem solid #e6e6e6;
+    background-color: var(--dashboardCardColor);
+    border: 0.09rem solid var(--dashboardBorders);
     border-radius: 10px;
     padding: 0.75rem;
 }
@@ -97,14 +103,14 @@ main {
     content: "";
     border-radius: 100%;
    
-    background: conic-gradient(rgb(46, 9, 102) 0% var(--fillPercentage), transparent var(--fillPercentage)100%);
+    background: conic-gradient(var(--progressBarsFill) 0% var(--fillPercentage), transparent var(--fillPercentage)100%);
     width: 3rem;
     height:3rem;
 }
 .progress-circle {
     position:relative;
     border-radius: 100%;
-    background: rgb(218, 198, 246);
+    background: var(--progressBarsDefault);
     width: 3rem;
     height:3rem;
 }
@@ -115,7 +121,7 @@ main {
     transform: translate(10%, 10%);
     content: "";
     border-radius: 100%;
-    background: white;;
+    background: var(--dashboardBackground);
     width: 2.5rem;
     height:2.5rem;
 }
@@ -127,7 +133,7 @@ main {
 }
 
 .card-label {
-    color: #777;
+    color: var(--dashboardSubTxtColor);
     font-weight: 500;
     font-size: 0.9rem;
     margin: 0;
@@ -177,8 +183,8 @@ main {
     display: flex;
     /* Use flexbox for layout */
     align-items: center;
-    background-color: white;
-    border: 1px solid #eee;
+    background-color: var(--dashboardCardColor);
+    border: 1px solid var(--dashboardBorders);
     border-radius: 10px;
     width: 100%;
     box-sizing: border-box;
@@ -192,7 +198,7 @@ main {
 }
 
 .snap-image {
-    background-color: #f0f0f0;
+    background-color: var(--dashboardBorders);
     border-radius: 8px;
     width: 50px;
     height: 50px;
@@ -215,13 +221,13 @@ main {
 
 .snap-details p {
     margin: 0;
-    color: #777;
+    color: var(--dashboardSubTxtColor);
     font-size: 0.9rem;
 }
 
 .snap-time {
     font-size: 0.8rem;
-    color: #777;
+    color:  var(--dashboardSubTxtColor);
     position: absolute;
     top: 15px;
     right: 50px;
@@ -237,15 +243,15 @@ main {
 }
 
 .snap-status.green {
-    background-color: green;
+    background-color: var(--statusGood);
 }
 
 .snap-status.orange {
-    background-color: orange;
+    background-color:var(--statusOk);
 }
 
 .snap-status.red {
-    background-color: red;
+    background-color: var(--statusBad);
 }
 
 .bottomBar {
@@ -255,8 +261,8 @@ main {
     align-items: center;
     width: 100%;
     padding: 0.25rem;
-    border-top: 1px solid #eee;
-    background-color: white;
+    border-top: 1px solid var(--dashboardBorders);
+    background-color: var(--dashboardFooter);
     position: fixed;
     bottom: 0;
 }

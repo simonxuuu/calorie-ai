@@ -21,10 +21,10 @@ export default function Dashboard() {
             <Header/>
             
             <div className="navBar">
-                <div className="navInfo">
+                
                     <h1 className="navTitle">{getDate().date}</h1>
                     <h1 className="navsubTitle">{getDate().time.split()}</h1>
-                </div>
+                
             </div>
                   
 

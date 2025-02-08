@@ -1,410 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
 
+:root {
+    --progressBarsDefault : rgb(218, 198, 246);
+    --progressBarsFill : rgb(46, 9, 102);
+    --dashboardBackground : rgb(248, 248, 248);
+    --dashboardHeader : rgb(244, 244, 244);
+    --dashboardFooter : white;
+    --dashboardCardColor: white;
+    --dashboardBorders : #e6e6e6;
+    --dashboardMainTxtColor : black;
+    --dashboardSubTxtColor : rgb(119, 119, 119);
+
+    --statusGood : green;
+    --statusOk : orange;
+    --statusBad : red;
+}
 
 body,
 html {
-  
   overflow-y: hidden;
   overflow-x: hidden;
   box-sizing: border-box;
   border: 0;
-  font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
-  --topBarColor: rgba(26, 26, 26, 0.377);
-  --topBarBorderColor: rgba(255, 255, 255, 0.048);
-  --darker: rgb(10, 10, 10);
-  --dark: rgb(20, 20, 20);
-  --lessdark: rgb(36, 36, 36);
-  --light: rgb(235, 235, 235);
-  --subTextColor: rgb(54, 54, 54);
-  --accent1: rgb(24, 204, 120);
-  --accent1Darker:rgb(32, 177, 87);
-  --accent1Btn: rgba(9, 119, 86, 0.521);
-  --accent2: rgb(255, 255, 255);
-  --lessonLocked: rgb(41, 41, 41);
-  --lessonComplete: rgb(13, 156, 77);
-  --lessonInComplete: rgb(12, 175, 85);
-  --transitionAnim : "none";
-  --correctAnswer: rgb(27, 143, 75);
-  --wrongAnswer: rgb(202, 52, 41);
-
-  --red: rgb(224, 56, 44);
-  --blue:rgb(20, 165, 248);
-  --teal: rgb(32, 189, 163);
-  --darkTeal: rgb(27, 143, 75);
-  --tealGreen : rgb(17, 199, 108);
-  --darkTealGreen: rgb(27, 143, 75);
-  --green: rgb(12, 175, 85);
-  --darkGreen : rgb(12, 143, 71);
-
-
-  --white : rgb(230, 230, 230);
-  --grey: rgb(185, 185, 180);
-  --darkGrey: rgb(133, 133, 133);
-  --charcoal: rgb(21, 21, 21);
-  --lightCharcoal:rgb(25, 25, 25);
-  --lightestCharcoal: rgb(32, 32, 32);
-  --darkCharcoal:rgb(17, 17, 17);
-
-  background-color: var(--white);
-  color :var(--charcoal);
   text-wrap: wrap;
-
+  overscroll-behavior: none;
   scrollbar-color: rgb(255, 255, 255, 0.2) transparent;
   scrollbar-width: 7px; margin:0; border:0; padding:0;
 }
 html{
   margin:0; border:0; padding:0;
   scroll-behavior: smooth;
- 
   overflow-y: scroll;
+
 }
 main {
   min-height: 100vh;
 }
-header {
-  z-index: 1;
-  margin:0;
-  border:0;
-  position:fixed;
-  box-sizing: border-box;
-  background:var(--white);
-  width:100vw;
-  display:flex;
-  align-items: center;
-  justify-content: space-between;
-  padding : 2em;
-  padding-left: 1em;
-  padding-right: 1em;
-}
-footer{
-  margin:0;
-  margin-top: 5em;
-  border:0;
-  bottom:0;
-  box-sizing: border-box;
-  background:var(--charcoal);
-  width:100vw;
-  display:flex;
-  align-items: center;
-  justify-content: space-between;
-  padding : 2em;
-  padding-top:3em; padding-bottom:3em;
-}
-.footerBtn{
-  color:var(--white);
-  font-size: 1.5em;
-  
-}
-button {
-  border:0; cursor: pointer;
-  padding:0; margin:0;
-  background:transparent;
-  font-size: 2em;
-  font-weight: 600;
-}
-.headerBtn {
-  -webkit-tap-highlight-color: transparent;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  font-size: 1em;
-  font-weight: 400;
-}
-
-.trackingPage {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 5rem;  
-}
-
-.trackingSide, .nutritionalSide {
-  /* flex: 1; */
-  display: flex;
-  flex-direction: column;
-  margin-top: 0;
-  align-items: center;
-  padding: 1rem;
-}
-
-
-.trackingSide {
-  max-width: 75%;
-  width: 50%;
-  border-radius: 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  background-color: #edecec;
-  padding-bottom: 2rem;
-}
-
-.trackingSideFORM {
-  max-width: 75%;
-  display: flex;
-  flex-direction: column; 
-}
-
-.nutritionalSide {
-  max-width: 50%;
-  margin-right: 1vh;
-}
-
-.feedback {
-  width: 75%;
-}
-
-.submittedImage {
-  margin-top: 1em;
-  max-width: 100%;
-  height: auto;
-  border-radius: 0.2vw;
-  filter: drop-shadow(0px 0px 0.5em rgba(0, 0, 0, 0.2));
-}
-
-#additionalInput {
-  margin-bottom: 1em;
-  width: 95%;
-  padding: 0.75em 1em; 
-  border: 1px solid var(--darkGrey);
-  border-radius: 0.5em;
-  font-size: 1rem; 
-  transition: border-color 0.3s ease, box-shadow 0.3s ease; 
-}
-
-#additionalInput:focus {
-  border-color: #007bff; /* Change border color on focus */
-  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a subtle shadow on focus */
-  outline: none; /* Remove default outline */
-}
-
-.header {
-  text-align: center;
-
-}
-
-.nutritionalValues {
-  display: block;
-  margin-top: 1em;
-}
-
-.emptyProgressBar {
-  width: 80%;
-  background-color: #e0e0e0;
-  height: 20px;
-  margin-top: 0.5em;
-  border-radius: 1vw;
-}
-
-.filledProgressBar {
-  height: 100%;
-  border-radius: 1vw;
-  max-width: 100%;
-  overflow: hidden;
-  background-color: #76c7c0;
-}
-
-.loginBtn {
-  font-size: 0.85em;
-  font-weight: 550;
-  background-color: var(--charcoal);
-  border-radius: 0.3em;
-  color: var(--white);
-  padding:0.4em;
-  padding-left:0.5em;
-  padding-right:0.5em;
-}
-.generalButton{
-  font-size: 1em;
-  background-color: var(--charcoal);
-  border-radius: 0.3em;
-  color: var(--white);
-  padding:0.6em;
-  padding-left:1em;
-  padding-right:1em;
-  margin-top: 1.5em;
-  margin-bottom: 1.5em;
-}
-section {
-  width:100vw;
-  height:fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding:0;
-  
-}
-.googleLogin{
-  background: var(--white);
-  align-items: center;
-  width:fit-content;
-  padding: 1em;
-  
-  font-size: 1em;
-  border: 0.1em solid var(--darkGrey);
-  border-radius: 1em;
-  
-}
-.loginPage{
-  width: 100vw;
-  display: flex;
-  align-items: center; justify-content: center; flex-direction: column;
-}
-.sectionContentRight{
-  margin:0;
-  padding:0;
-  padding-left: 1em;
-}
-.sectionContentLeft{
-  margin:0;
-  padding:0;
-  padding-left: 1em;
-}
-.showcaseImage{
-  object-fit: cover;
-  width:fit-content;
-  height:25em;
-  border-radius: 2em;
-}
-.heading {
-  font-size: 3em;
-  max-width: 95%;
-}
-.subHeading {
-  font-weight: 400;
-  max-width: 90%;
-}
-#headerTitle {
-  font-size: 1.5em;
-  display: none;
-}
-
-.file-upload {
-  border: 2px dashed #cbd5e0;
-  border-radius: 4px;
-  padding: 20px;
-  text-align: center;
-  cursor: pointer;
-  
-  transition: all 1s ease;
-}
-
-.file-upload:hover {
-  border: 2px dashed #2b3743;
-}
-
-.file-upload p {
-  margin: 0;
-  color: #718096;
-}
-@media only screen and (min-width: 383px) {
-  .loginBtn {
-    font-size: 1em;
-    padding:0.5em;
-    padding-left:1em;
-    padding-right:1em;
-  }
-}
-
-@media only screen and (min-width: 500px) {
-  #headerTitle{
-    display: block;
-  }
-}
-@media only screen and (max-width: 1024px) {
-  .showcaseImage{
-    order:1;
-  }
-}
-@media only screen and (min-width: 1024px) {
-  
-  .sectionContentRight{
-    margin:0;
-    margin-right: 2em;
-  }
-  .sectionContentLeft{
-    margin:0;
-    margin-left: 2em;
-    order:0;
-  }
-  header {
-    
-    padding : 2em;
-    padding-left: 10em;
-    padding-right: 10em;
-  }
-  .headerBtn {
-    font-size: 1.2em;
-  }
-  .subHeading {
-    
-    max-width: 95%;
-  }
-  .generalButton {
-    font-size: 1em;
-    padding:0.5em;
-    padding-left:1.2em;
-    padding-right:1.2em;
-  }
-  .loginBtn {
-    font-size: 1em;
-    padding:0.5em;
-    padding-left:1.2em;
-    padding-right:1.2em;
-  }
-  #headerTitle {
-    font-size: 2em;
-    
-  }
-  section {
-    
-    align-items: center;
-    justify-content: space-between;
-    padding:0;
-    padding-left:3em;
-    padding-right:3em;
-    flex-direction: row;
-  }
-
-
-}
-
-
-
-@media only screen and (max-width: 768px) {
-  .trackingPage {
-      flex-direction: column;
-      align-items: center;
-      justify-content: center; /* Center content vertically */
-      overflow-y: auto;
-      height: auto; /* Allow height to adjust based on content */
-  }
-  
-
-  .headerBtn {
-    color: inherit; 
-    background-color: transparent; 
-    border: none; 
-    text-decoration: none; 
-}
-
-  .trackingSide, .nutritionalSide {
-      max-width: 100%;
-      width: 80%;
-      padding: 1rem;
-      padding-bottom: 2rem;
-  }
-
-  .nutritionalSide {
-    width: 95%;
-  }
-
-  .submittedImage {
-      width: 100%;
-      
-      height: auto;
-  }
-} 
