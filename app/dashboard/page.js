@@ -3,7 +3,15 @@ import './dashboard.css';
 
 export default function Dashboard() {
 
-    
+    const getDate = () =>  {
+        let d = new Date();
+        let utcTime = d.toUTCString();
+        utcTime = new Date(utcTime);
+        return {
+            date : utcTime.toLocaleDateString('en-US', { day: 'numeric', month: 'long', year: 'numeric' }),
+            time : utcTime.toLocaleTimeString('en-US',{ hour: 'numeric', minute: 'numeric'})
+        }
+    }
 
     return (
         <main> 
@@ -17,8 +25,8 @@ export default function Dashboard() {
             
             <div className="navBar">
                 <div className="navInfo">
-                    <h1 className="navTitle">Date</h1>
-                    <h1 className="navsubTitle">Time</h1>
+                    <h1 className="navTitle">{getDate().date}</h1>
+                    <h1 className="navsubTitle">{getDate().time.split()}</h1>
                 </div>
             </div>
                   
