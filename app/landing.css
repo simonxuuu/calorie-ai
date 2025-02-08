@@ -1,0 +1,200 @@
+* {
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 30px;
+    background-color: white;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.headerLogo {
+    display: flex;
+    align-items: center;
+}
+
+.headerLogo img {
+    height: 25px;
+}
+
+.headerMiddleContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    gap: 40px;
+}
+
+.headerMiddleContent a {
+    text-decoration: none;
+    color: #737373;
+    font-size: 14px;
+}
+
+.headerRightContent {
+    display: flex;
+    align-items: center;
+}
+
+.round-button {
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    font-size: 14px;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    padding-bottom: 80px;
+}
+
+.hero-image {
+    max-width: 50%;
+    height: auto;
+    margin-right: 50px;
+}
+
+.hero-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+
+.hero-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.hero-main {
+    font-size: 70px;
+    font-weight: 500;
+    text-wrap: wrap;
+    text-align: left;
+    line-height: 1;
+    margin-bottom: 20px;
+    font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.hero-desc {
+    font-size: 20px;
+    font-weight: 300;
+    text-align: left;
+    max-width: 450px;
+    line-height: 1.4;
+    margin-bottom: 30px;
+    color: #4a4a4a;
+}
+
+.hero-desc b, .hero-desc strong {
+    font-weight: 500;
+}
+
+.hero-right .round-button {
+    background-color: black;
+    color: white;
+    border: none;
+    font-size: 16px;
+    padding: 15px 30px;
+    font-weight: 500;
+}
+
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    background-color: white;
+    border-top: 1px solid #e0e0e0;
+    color: #737373;
+    font-size: 14px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .topBar {
+        padding: 15px 20px; /* Reduced padding for mobile top bar */
+    }
+
+    .headerLogo img {
+        height: 20px; /* Smaller logo on mobile */
+    }
+
+    .headerMiddleContent {
+        display: none; /* Hide middle content on mobile - or you can adjust as needed */
+    }
+
+    .headerRightContent {
+        margin-left: auto; /* Push sign-in button to the right on mobile if needed */
+    }
+
+    .round-button {
+        font-size: 12px; /* Smaller sign-in text on mobile */
+        padding: 8px 15px; /* Smaller padding for sign-in button */
+    }
+
+    .hero {
+        flex-direction: column; /* Stack hero image and text vertically */
+        padding-top: 30px; /* Reduced top padding for mobile hero */
+        padding-bottom: 50px; /* Reduced bottom padding for mobile hero */
+        text-align: center; /* Center align text in mobile hero */
+    }
+
+    .hero-image {
+        max-width: 80%; /* Make hero image wider on mobile */
+        margin-right: 0; /* Remove right margin on mobile */
+        margin-bottom: 20px; /* Add bottom margin to image on mobile */
+    }
+
+    .hero-right {
+        align-items: center; /* Center align hero text content */
+        padding-left: 20px; /* Add some left padding for text */
+        padding-right: 20px; /* Add some right padding for text */
+    }
+
+    .hero-main {
+        font-size: 40px; /* Smaller hero main text on mobile */
+        text-align: center; /* Center text align for mobile */
+        margin-bottom: 15px; /* Reduced margin bottom */
+    }
+
+    .hero-desc {
+        font-size: 16px; /* Smaller hero description on mobile */
+        text-align: center; /* Center text align for mobile */
+        max-width: 90%; /* Wider description container on mobile */
+        margin-bottom: 25px; /* Reduced margin bottom */
+    }
+
+    .hero-right .round-button {
+        font-size: 14px; /* Slightly smaller get started button text */
+        padding: 12px 25px; /* Adjusted padding for get started button */
+    }
+
+    .footer {
+        padding: 15px; /* Reduced footer padding on mobile */
+        font-size: 12px; /* Smaller footer text on mobile */
+        text-align: center; /* Center align footer text if needed */
+    }
+}
