@@ -1,0 +1,176 @@
+/* auth.css */
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensure full viewport height */
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif; /* Match font */
+    padding: 20px; /* Add some padding around the main content */
+    background-color: rgb(251, 251, 251);
+}
+
+.auth-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    max-width: 400px; /* Limit width of the auth box */
+    padding: 40px 30px; /* Padding inside the box */
+    border-radius: 20px; /* Rounded corners */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+}
+
+.auth-header {
+    font-size: 2.5rem; /* Large header size */
+    font-weight: 500; /* Medium font weight */
+    text-align: center; /* Center align header text */
+    margin-bottom: 30px; /* Space below the header */
+    line-height: 1.1; /* Tighter line height for the header */
+}
+
+.error {
+    color: #dc3545; /* Error text color - red-ish */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spacing between form elements */
+    margin-bottom: 20px; /* Space below the form */
+}
+
+input[type="email"],
+input[type="password"] {
+    padding: 12px 20px; /* Padding inside input fields */
+    border: 1px solid #ccc; /* Light grey border */
+    border-radius: 50px; /* Pill-shaped input fields */
+    font-size: 1rem; /* Input text size */
+    outline: none; /* Remove default focus outline */
+    transition: border-color 0.2s; /* Smooth border color transition on focus */
+    margin-bottom: 10px; /* Space below input fields */
+    color: #333; /* Input text color */
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #888; /* Slightly darker border on focus */
+}
+
+button[type="submit"],
+button:not([type="submit"]) { /* Style for both submit and social buttons */
+    padding: 12px 20px; /* Button padding */
+    border: none; /* No border for primary buttons */
+    border-radius: 50px; /* Pill-shaped buttons */
+    background-color: #333; /* Dark background color */
+    color: white; /* White text color */
+    font-size: 1rem; /* Button text size */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background color transition */
+    font-weight: 500; /* Medium font weight for buttons */
+    text-align: center; /* Ensure text is centered */
+    text-decoration: none; /* Remove underline from links if used as buttons */
+    display: inline-block; /* To allow setting width if needed */
+    width: 100%; /* Full width buttons */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle button shadow */
+}
+
+button[type="submit"]:hover,
+button:not([type="submit"]):hover {
+    background-color: #555; /* Slightly lighter background on hover */
+}
+
+button:disabled {
+    background-color: #ddd; /* Greyed out background for disabled button */
+    color: #888; /* Greyed out text for disabled button */
+    cursor: not-allowed; /* No cursor for disabled button */
+}
+
+/* Specific style for Google and Apple buttons */
+button:not([type="submit"]) {
+    background-color: white; /* White background for social buttons */
+    color: #333; /* Dark text for social buttons */
+    border: 1px solid #ccc; /* Light grey border for social buttons */
+    display: flex; /* Enable flex for icon and text alignment */
+    align-items: center; /* Vertically align icon and text */
+    justify-content: center; /* Horizontally center content */
+    gap: 10px; /* Spacing between icon and text */
+    box-shadow: none; /* Remove shadow for social buttons */
+}
+
+button:not([type="submit"]):hover {
+    background-color: #f0f0f0; /* Light grey hover for social buttons */
+}
+
+
+.alt-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+    gap: 15px; /* Spacing between alt options */
+    text-align: center; /* Center text within options */
+    margin-top: 20px; /* Add margin on top to separate from buttons */
+}
+
+.alt-options-header {
+    font-size: 1rem; /* Base font size for alt options */
+    color: #555; /* Grey color for alt options text */
+    margin: 0; /* Reset default margins */
+    font-weight: normal; /* Regular font weight */
+}
+
+.alt-options-link {
+    color: #000000; /* Example link color - blue */
+    text-decoration: none; /* Remove underline from links */
+    font-weight: 300; /* Slightly bolder link text */
+    transition: color 0.2s; /* Smooth color transition on hover */
+    border: 1px solid rgba(0,0,0,0.5); /* For consistent height */
+    padding: 0.75rem;
+    border-radius: 20px;
+}
+
+.alt-options-link:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline; /* Optional: underline on hover for links */
+}
+
+/* Separator "or" style */
+.alt-options::before,
+.alt-options::after {
+    content: "";
+    flex-grow: 1;
+    background: #ccc;
+    height: 1px;
+    margin: 0 10px;
+}
+
+.alt-options {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Ensure 'or' is centered */
+    margin-top: 20px; /* Space above the 'or' separator */
+    margin-bottom: 20px; /* Space below the 'or' separator */
+}
+
+.alt-options h2 {
+    color: #777; /* Grey color for 'or' text */
+    font-size: 1rem; /* Size of 'or' text */
+    margin: 0 10px; /* Spacing around 'or' text */
+    font-weight: normal; /* Regular weight for 'or' text */
+}
+
+.alt-options::before,
+.alt-options::after {
+    content: "";
+    flex-grow: 1;
+    background: #ccc; /* Color of the separator lines */
+    height: 1px; /* Thickness of the separator lines */
+}
+
+
+/* Ensure link styles within alt-options-header are correctly targeted */
+.alt-options-header .alt-options-link {
+    /* Apply link specific styles here if needed, or reuse .alt-options-link */
+}
