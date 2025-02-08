@@ -65,6 +65,7 @@ main {
     justify-content: center;
     padding-top: 50px; /* Added padding top to hero section */
     padding-bottom: 80px; /* Added padding bottom to hero section */
+    height: 90vh;
 }
 
 .hero-image {
