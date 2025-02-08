@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 main {
     background-color: #f8f8f8;
     display: flex;
@@ -5,31 +7,34 @@ main {
     align-items: center;
     height: 200%;
     padding-bottom: 10rem;
-  }
-  
-  .snappitLogo {
+    font-family: 'Inter',sans-serif;
+}
+
+.snappitLogo {
     font-weight: 800;
     font-size: 2rem;
-  }
+}
 
 
 
-  .snapTitleCont {
+.snapTitleCont {
     display: flex;
     justify-content: space-between;
     width: 100%;
     padding: 1rem;
     margin-left: 1rem;
     margin-right: 1rem;
-  }
-  .snapTitle {
+}
+
+.snapTitle {
     font-weight: 500;
 }
-  .navTitle {
-    font-weight: 600;
-  }
 
-  .viewAll {
+.navTitle {
+    font-weight: 600;
+}
+
+.viewAll {
     font-weight: 400;
     color: #777;
     font-size: 1rem;
@@ -38,217 +43,254 @@ main {
     transform: translateX(-50%);
     text-align: center;
 }
-  
-  .topBar {
+
+.topBar {
     display: flex;
     justify-content: space-between;
     width: 100%;
     padding: 1rem;
     background-color: #f3f3f3;
-  }
-  
-  .navBar {
+}
+
+.navBar {
     display: flex;
     width: 100%;
     padding: 1rem;
-    
+
     box-sizing: border-box;
     gap: 1rem;
     background-color: #f8f8f8;
-  }
-  
-  .topButtons {
+}
+
+.topButtons {
     display: flex;
     gap: 1rem;
-  }
-  
-  .card {
+}
+
+.card {
     background-color: white;
-    border: 1px solid #cecece;
+    border: 0.09rem solid #e6e6e6;
     border-radius: 10px;
-    padding: 20px;
-  }
-  
-  .card-content {
+    padding: 0.75rem;
+}
+
+.card-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  
-  .text-container {
+}
+
+.text-container {
     text-align: left;
-  }
-  
-  .calories-count {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 0.2rem;
-    margin-top: 0;
-  }
-  
-  .calories-label {
+}
+.progress-circle::before{
+    position: absolute;
+    top:0;
+    left:0;
+    content: "";
+    border-radius: 100%;
+    --fillPercentage : 25%;
+    background: conic-gradient(rgb(46, 9, 102) 0% var(--fillPercentage), transparent var(--fillPercentage)100%);
+    width: 3rem;
+    height:3rem;
+}
+.progress-circle {
+    position:relative;
+    border-radius: 100%;
+    background: rgb(218, 198, 246);
+    width: 3rem;
+    height:3rem;
+}
+.progress-circle::after{
+    position: absolute;
+    left:0;
+    top:0;
+    transform: translate(10%, 10%);
+    content: "";
+    border-radius: 100%;
+    background: white;;
+    width: 2.5rem;
+    height:2.5rem;
+}
+.card-data {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.card-label {
     color: #777;
+    font-weight: 500;
+    font-size: 0.9rem;
     margin: 0;
-  }
-  
-  .smallCards {
+}
+
+.smallCards {
     margin-top: 1rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     box-sizing: border-box;
-      width: calc(100% - 4rem); /* Make container the right width*/
-  }
-  
-  .calContainer {
+    flex:1;
+    width: calc(100% - 2rem);
+}
+
+.calContainer {
     margin-top: 1rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
     box-sizing: border-box;
-  }
-  
-  .calContainer .big {
+    width: calc(100% - 2rem);
+}
+
+.calContainer .big {
     box-sizing: border-box;
-    width: 19.5rem;
-  }
-  
-  .smallCards > * {
+    flex: 1;
+}
+
+.smallCards>* {
     flex: 0 0 calc(50% - 0.5rem);
     box-sizing: border-box;
-  }
-  
-  .yourSnaps {
-      margin-top: 20px;
-      padding: 15px;
-      width: 100%; /* Make the whole container take up full width of parent */
-      box-sizing: border-box; /* Include padding inside width */
-  }
+}
 
-  .snapCard {
-      flex: 1; /* Takes up equal space */
-      display: flex; /* Use flexbox for layout */
-      align-items: center;
-      background-color: white;
-      border: 1px solid #eee;
-      border-radius: 10px;
-      width: 100%;
-      box-sizing: border-box; /* Include padding inside width */
-      padding: 15px;
-      margin-bottom: 10px; /* Spacing between cards */
-      gap: 15px;
-      position: relative; /* Needed for absolute positioning */
-  }
-  
-  .snap-image {
-      background-color: #f0f0f0;
-      border-radius: 8px;
-      width: 50px;
-      height: 50px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-  }
-  
-  
-  .snap-details {
-      flex-grow: 1; /* Takes up remaining space */
-  }
-  
-  .snap-details h3 {
-      margin: 0; /* Removes default margin */
-  }
-  
-  .snap-details p {
-      margin: 0;
-      color: #777;
-      font-size: 0.9rem;
-  }
-  
-  .snap-time {
-      font-size: 0.8rem;
-      color: #777;
-      position: absolute;
-      top: 15px;
-      right: 50px;
-  }
-  
-  .snap-status {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      position: absolute;
-      top: 15px;
-      right: 15px;
-  }
-  
-  .snap-status.green {
-      background-color: green;
-  }
-  
-  .snap-status.orange {
-      background-color: orange;
-  }
-  
-  .snap-status.red {
-      background-color: red;
-  }
-  
-  .bottomBar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      padding: 1rem;
-      background-color: #f3f3f3;
-      margin-bottom: 1rem;
-      position: fixed;
-      bottom: 0;
-  }
-  
-  .iconNav:nth-child(3) {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%) translateY(-20px);
-      padding: 1rem;
-      border-radius: 50%;
-  }
-  
-  .yourSnaps > h2 {
-      font-weight: 600;
-      margin-bottom: 1rem;
-  }
-  
-  /* Responsive adjustments for desktop screens */
-  @media screen and (min-width: 1024px) {
-      .topBar {
-          padding-left: 5rem;
-          padding-right: 5rem;
-      }
-  
-  
-      .yourSnaps {
-          width: 70%;
-      }
-  
-      .calContainer {
-          width: calc(100% - 4rem); /* Same width as smallCards container */
-          margin-left: 2rem;
-          margin-right: 2rem;
-      }
-  
-      main {
-          max-width: 960px; /* Added max-width to main container */
-          margin-left: auto;
-          margin-right: auto;
-      }
+.yourSnaps {
+    margin-top: 20px;
+    padding: 15px;
+    width: 100%;
+    /* Make the whole container take up full width of parent */
+    box-sizing: border-box;
+    /* Include padding inside width */
+}
 
-      .bottomBar {
+.snapCard {
+    flex: 1;
+    /* Takes up equal space */
+    display: flex;
+    /* Use flexbox for layout */
+    align-items: center;
+    background-color: white;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    /* Include padding inside width */
+    padding: 15px;
+    margin-bottom: 10px;
+    /* Spacing between cards */
+    gap: 15px;
+    position: relative;
+    /* Needed for absolute positioning */
+}
+
+.snap-image {
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+
+.snap-details {
+    flex-grow: 1;
+    /* Takes up remaining space */
+}
+
+.snap-details h3 {
+    margin: 0;
+    /* Removes default margin */
+}
+
+.snap-details p {
+    margin: 0;
+    color: #777;
+    font-size: 0.9rem;
+}
+
+.snap-time {
+    font-size: 0.8rem;
+    color: #777;
+    position: absolute;
+    top: 15px;
+    right: 50px;
+}
+
+.snap-status {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.snap-status.green {
+    background-color: green;
+}
+
+.snap-status.orange {
+    background-color: orange;
+}
+
+.snap-status.red {
+    background-color: red;
+}
+
+.bottomBar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1rem;
+    background-color: #f3f3f3;
+    margin-bottom: 1rem;
+    position: fixed;
+    bottom: 0;
+}
+
+.iconNav:nth-child(3) {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    padding: 1rem;
+    border-radius: 50%;
+}
+
+.yourSnaps>h2 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+/* Responsive adjustments for desktop screens */
+@media screen and (min-width: 1024px) {
+    .topBar {
+        padding-left: 5rem;
+        padding-right: 5rem;
+    }
+
+
+    .yourSnaps {
+        width: 70%;
+    }
+
+    .calContainer {
+        width: calc(100% - 4rem);
+        /* Same width as smallCards container */
+        margin-left: 2rem;
+        margin-right: 2rem;
+    }
+
+    main {
+        max-width: 960px;
+        /* Added max-width to main container */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .bottomBar {
         width: 50%;
         border-radius: 2rem;
         border: 1px solid #cecece;
@@ -256,12 +298,13 @@ main {
         margin-bottom: 1rem;
         background-color: rgb(255, 255, 255, 0.1);
         backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px); /* For Safari support */
-        
-      }
-  
-      .calContainer .big {
-          width: 100%; /* Added width: 100% to big card */
-      }
-  }
+        -webkit-backdrop-filter: blur(10px);
+        /* For Safari support */
 
+    }
+
+    .calContainer .big {
+        width: 100%;
+        /* Added width: 100% to big card */
+    }
+}

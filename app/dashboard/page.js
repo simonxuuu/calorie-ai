@@ -2,6 +2,9 @@ import React from 'react';
 import './dashboard.css';
 
 export default function Dashboard() {
+
+    
+
     return (
         <main> 
             <div className="topBar">   
@@ -24,12 +27,10 @@ export default function Dashboard() {
                 <div className="card big">
                     <div className="card-content">
                         <div className="text-container">
-                            <h2 className="calories-count">1244</h2>
-                            <p className="calories-label">Calories left</p>
+                            <h2 className="card-data">1244</h2>
+                            <p className="card-label">Calories left</p>
                         </div>
-                        <div className="progress-circle">
-                            Circle
-                        </div>
+                        <div className="progress-circle"/>
                     </div>
                 </div>
             </div>
@@ -39,45 +40,37 @@ export default function Dashboard() {
                 <div className="card small">
                     <div className="card-content">
                         <div className="text-container">
-                        <h2 className="calories-count">58g</h2>
-                        <p className="calories-label">Protein</p>
+                        <h2 className="card-data">58g</h2>
+                        <p className="card-label">Protein</p>
                         </div>
-                        <div className="progress-circle">
-                            Circle
-                        </div>
+                        <div className="progress-circle"/>
                     </div>
                 </div>
                 <div className="card small">
                     <div className="card-content">
                         <div className="text-container">
-                        <h2 className="calories-count">58g</h2>
-                        <p className="calories-label">Protein</p>
+                        <h2 className="card-data">58g</h2>
+                        <p className="card-label">Protein</p>
                         </div>
-                        <div className="progress-circle">
-                            Circle
-                        </div>
+                        <div className="progress-circle"/>
                     </div>
                 </div>
                 <div className="card small">
                     <div className="card-content">
                         <div className="text-container">
-                        <h2 className="calories-count">58g</h2>
-                        <p className="calories-label">Protein</p>
+                        <h2 className="card-data">58g</h2>
+                        <p className="card-label">Protein</p>
                         </div>
-                        <div className="progress-circle">
-                            Circle
-                        </div>
+                        <div className="progress-circle"/>
                     </div>
                 </div>
                 <div className="card small">
                     <div className="card-content">
                         <div className="text-container">
-                        <h2 className="calories-count">58g</h2>
-                        <p className="calories-label">Protein</p>
+                        <h2 className="card-data">58g</h2>
+                        <p className="card-label">Protein</p>
                         </div>
-                        <div className="progress-circle">
-                            Circle
-                        </div>
+                        <div className="progress-circle"/>
                     </div>
                 </div>
             </div>
